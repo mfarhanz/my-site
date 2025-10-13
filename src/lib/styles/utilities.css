@@ -1,0 +1,146 @@
+:root {
+    --scroll-thumb: theme('colors.light.scroll-thumb');
+    --scroll-track: theme('colors.light.scroll-track');
+    --scroll-hover: theme('colors.light.scroll-hover');
+    --light-glow-accent: theme('colors.light.glow-accent');
+    --highlight-background: theme('colors.light.highlighted');
+    --highlight-foreground: theme('colors.light.text-highlighted');
+}
+
+.dark {
+    --scroll-thumb: theme('colors.dark.scroll-thumb');
+    --scroll-track: theme('colors.dark.scroll-track');
+    --scroll-hover: theme('colors.dark.scroll-hover');
+    --dark-glow-accent: theme('colors.dark.glow-accent');
+    --highlight-background: theme('colors.dark.highlighted');
+    --highlight-foreground: theme('colors.dark.text-highlighted');
+}
+
+::selection {
+  background: var(--highlight-background);
+  color: var(--highlight-foreground);
+}
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+
+    .scrollbar::-webkit-scrollbar-track {
+        background-color: var(--scroll-track);
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scroll-thumb);
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scroll-hover);
+    }
+}
+
+@utility tilt-zoom-0 {
+    @apply z-10;
+    transform: rotateX(25deg) rotateY(-20deg) skew(-7deg, 5deg) scale(1.25);
+}
+
+@utility tilt-zoom-1 {
+    @apply z-10;
+    transform: rotateX(25deg) rotateY(-20deg) skew(-7deg, 5deg) scale(1.5);
+}
+
+.smooth-trans-0 {
+    @apply transition-all duration-50 ease-in-out;
+}
+
+.smooth-trans-1 {
+    @apply transition-all duration-100 ease-in-out;
+}
+
+.smooth-trans-2 {
+    @apply transition-all duration-200 ease-in-out;
+}
+
+.smooth-trans-3 {
+    @apply transition-all duration-300 ease-in-out;
+}
+
+.smooth-trans-4 {
+    @apply transition-all duration-500 ease-in-out;
+}
+
+.smooth-trans-5 {
+    @apply transition-all duration-650 ease-in-out;
+}
+
+.smooth-trans-6 {
+    @apply transition-all duration-800 ease-in-out;
+}
+
+.smooth-trans-7 {
+    @apply transition-all duration-1000 ease-in-out;
+}
+
+.smooth-trans-8 {
+    @apply transition-all duration-1500 ease-in-out;
+}
+
+.smooth-trans-9 {
+    @apply transition-all duration-1750 ease-in-out;
+}
+
+.smooth-trans-10 {
+    @apply transition-all duration-2000 ease-in-out;
+}
+
+.text-sizing-0 {
+    @apply text-[clamp(0rem,3.4vw,10rem)] md:text-[clamp(0rem,2vw,10rem)] lg:text-[clamp(0rem,1.2vw,10rem)];
+}
+
+.text-sizing-1 {
+    @apply text-[clamp(0rem,4vw,10rem)] md:text-[clamp(0rem,2.2vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
+}
+
+.text-sizing-2 {
+    @apply text-[clamp(0rem,4.5vw,10rem)] md:text-[clamp(0rem,2.7vw,10rem)] lg:text-[clamp(0rem,1.7vw,10rem)];
+}
+
+.subtitle-sizing-1 {
+    @apply text-[clamp(1rem,4.5vw,10rem)] sm:text-[clamp(1rem,2vw,10rem)];
+}
+
+.subtitle-sizing-2 {
+    @apply text-[clamp(1rem,5.8vw,10rem)] md:text-[clamp(1rem,4vw,10rem)] lg:text-[clamp(1rem,2.4vw,10rem)];
+}
+
+.button-text-sizing {
+    @apply text-[clamp(0rem,4.5vw,10rem)] md:text-[clamp(0rem,1.8vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
+}
+
+.title-sizing {
+    @apply text-[clamp(1rem,8vw,10rem)] md:text-[clamp(1rem,5vw,10rem)] lg:text-[clamp(1rem,3.2vw,10rem)];
+}
+
+.alt-text-sizing {
+    @apply text-[clamp(1rem,0.8vw,10rem)] sm:text-[clamp(1rem,0.8vw,10rem)];
+}
+
+.section {
+    @apply flex flex-col px-[12vw];
+}
+
+.grid-responsive {
+    @apply grid md:grid-cols-1 items-center w-full;
+}
+
+.icon-button {
+    @apply relative text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary;
+}
+
+.nav-link {
+    @apply relative rounded-xl px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs dark:border border-light-secondary dark:border-dark-secondary text-shadow-[0_0_20px_var(--light-glow-accent),0_0_20px_var(--light-glow-accent)] dark:text-shadow-[0_0_25px_var(--dark-glow-accent),0_0_25px_var(--dark-glow-accent)];
+}
+
+.nav-link.active {
+    @apply text-light-accent dark:text-dark-accent text-shadow-[0_0_5px_var(--light-glow-accent),0_0_5px_var(--light-glow-accent)] dark:text-shadow-[0_0_5px_var(--dark-glow-accent),0_0_5px_var(--dark-glow-accent)];
+}
