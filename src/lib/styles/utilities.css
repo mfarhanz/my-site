@@ -94,19 +94,19 @@
 }
 
 .text-sizing-0 {
-    @apply text-[clamp(0rem,3.4vw,10rem)] md:text-[clamp(0rem,2vw,10rem)] lg:text-[clamp(0rem,1.2vw,10rem)];
+    @apply text-[clamp(0rem,3.6vw,10rem)] md:text-[clamp(0rem,2vw,10rem)] lg:text-[clamp(0rem,1.2vw,10rem)];
 }
 
 .text-sizing-1 {
-    @apply text-[clamp(0rem,4vw,10rem)] md:text-[clamp(0rem,2.2vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
+    @apply text-[clamp(0rem,4.3vw,10rem)] md:text-[clamp(0rem,2.2vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
 }
 
 .text-sizing-2 {
-    @apply text-[clamp(0rem,4.5vw,10rem)] md:text-[clamp(0rem,2.7vw,10rem)] lg:text-[clamp(0rem,1.7vw,10rem)];
+    @apply text-[clamp(0rem,5.1vw,10rem)] md:text-[clamp(0rem,2.7vw,10rem)] lg:text-[clamp(0rem,1.7vw,10rem)];
 }
 
 .subtitle-sizing-1 {
-    @apply text-[clamp(1rem,4.5vw,10rem)] sm:text-[clamp(1rem,2vw,10rem)];
+    @apply text-[clamp(1rem,4.5vw,10rem)] md:text-[clamp(1rem,2.5vw,10rem)] lg:text-[clamp(1rem,2vw,10rem)];
 }
 
 .subtitle-sizing-2 {
@@ -114,7 +114,7 @@
 }
 
 .button-text-sizing {
-    @apply text-[clamp(0rem,4.5vw,10rem)] md:text-[clamp(0rem,1.8vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
+    @apply text-[clamp(0.5rem,4.5vw,10rem)] md:text-[clamp(0.5rem,1.8vw,10rem)] lg:text-[clamp(0.5rem,1.4vw,10rem)];
 }
 
 .title-sizing {
@@ -122,7 +122,15 @@
 }
 
 .alt-text-sizing {
-    @apply text-[clamp(1rem,0.8vw,10rem)] sm:text-[clamp(1rem,0.8vw,10rem)];
+    @apply text-[clamp(0.5rem,3.2vw,10rem)] md:text-[clamp(0.5rem,1.9vw,10rem)] lg:text-[clamp(0.5rem,1.1vw,10rem)];
+}
+
+.icon-sizing-1 {
+    @apply w-[1.1rem] md:w-[2.5vw] lg:w-[1.5vw] h-auto;
+}
+
+.icon-sizing-2 {
+    @apply w-[1.7rem] md:w-[3vw] lg:w-[2vw] h-auto;
 }
 
 .section {
@@ -134,11 +142,15 @@
 }
 
 .icon-button {
-    @apply relative text-light-text dark:text-dark-text hover:text-light-primary dark:hover:text-dark-primary;
+    @apply relative text-light-text dark:text-dark-text;
+}
+
+.link-hover {
+    @apply hover:text-light-primary dark:hover:text-dark-primary;
 }
 
 .nav-link {
-    @apply relative rounded-xl px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs dark:border border-light-secondary dark:border-dark-secondary text-shadow-[0_0_20px_var(--light-glow-accent),0_0_20px_var(--light-glow-accent)] dark:text-shadow-[0_0_25px_var(--dark-glow-accent),0_0_25px_var(--dark-glow-accent)];
+    @apply relative rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs dark:border border-light-secondary dark:border-dark-secondary text-shadow-[0_0_20px_var(--light-glow-accent),0_0_20px_var(--light-glow-accent)] dark:text-shadow-[0_0_25px_var(--dark-glow-accent),0_0_25px_var(--dark-glow-accent)];
 }
 
 .nav-link.active {

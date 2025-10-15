@@ -9,9 +9,9 @@ export default {
     extend: {
       colors: {
         light: {
-          background: '#ccb4f0ff',
+          background: '#e7d7ff',
           'background-trans': '#ddd0f088',
-          'background-button': '#d1c2ec88',
+          'background-button': '#c5afec88',
           drawer: '#d1c2ec33',
           text: '#2c254d',
           'text-muted': '#6f6785',

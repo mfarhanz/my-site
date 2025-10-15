@@ -8,13 +8,13 @@
 		{ name: 'Home', href: '/' },
 		{ name: 'Projects', href: '/projects' },
     { name: 'Notes', href: '/notes' },
-		{ name: 'Other Stuff', href: '/other' }
+		{ name: 'Contact', href: '/contact' }
 	];
 
 	let menuOpen = false;
 </script>
 
-<nav class="sticky w-full flex items-center justify-between top-0 z-50 px-[12vw] py-4 backdrop-blur bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8">
+<nav class="sticky w-full flex items-center justify-between top-0 z-50 px-[12vw] py-[1.5vh] md:py-[1vh] lg:py-[2.2vh] backdrop-blur bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8">
   <a
     href="/"
     class="subtitle-sizing-1 font-bold text-light-primary dark:text-dark-primary pr-4 smooth-trans-8"
@@ -22,10 +22,10 @@
     Farhan Zia
   </a>
 
-  <div class="flex items-center gap-6 sm:gap-8">
+  <div class="flex items-center gap-[2vw]">
     <!-- Desktop Nav -->
     <ul
-      class="hidden sm:flex flex-row sm:items-center button-text-sizing text-light-text dark:text-dark-text gap-3"
+      class="hidden sm:flex flex-row sm:items-center button-text-sizing text-light-text dark:text-dark-text gap-[1vw]"
     >
       {#each navLinks as link}
         <li class="flex w-full sm:w-auto">
@@ -48,9 +48,9 @@
         aria-label="Toggle theme"
       >
         {#if $darkMode}
-          <Moon size="clamp(1.4rem, 2vw, 10rem)" class="text-dark-text" />
+          <Moon class="text-dark-text icon-sizing-2" />
         {:else}
-          <Sun size="clamp(1.4rem, 2vw, 10rem)" class="text-light-text" />
+          <Sun class="text-light-text icon-sizing-2" />
         {/if}
       </button>
 
@@ -60,9 +60,9 @@
         aria-label="Toggle navigation menu"
       >
         {#if menuOpen}
-          <X size="clamp(1.4rem, 2vw, 10rem)"/>
+          <X class="icon-sizing-2" />
         {:else}
-          <Menu size="clamp(1.4rem, 2vw, 10rem)" />
+          <Menu class="icon-sizing-2" />
         {/if}
       </button>
     </div>
@@ -71,7 +71,7 @@
 
 <!-- Mobile Drawer -->
 <div
-  class={`sm:hidden flex fixed top-0 right-0 h-full backdrop-blur-sm bg-light-drawer dark:bg-dark-drawer smooth-trans-3 z-40 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+  class={`sm:hidden flex fixed top-0 right-0 z-40 h-full backdrop-blur-sm bg-light-drawer dark:bg-dark-drawer smooth-trans-3 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
 >
   <div class="flex flex-col items-end gap-4 p-8 mt-20 button-text-sizing">
     {#each navLinks as link}

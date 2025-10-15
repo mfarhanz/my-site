@@ -3,21 +3,49 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	// import { darkMode } from '$lib/stores/theme';
+	import { blur, fly } from 'svelte/transition';
+	import { cubicIn, cubicOut } from 'svelte/easing';
+	
+	let children;	// ✅ Get slotted children correctly in Svelte 5
 
-	// ✅ Get slotted children correctly in Svelte 5
-	let children;
+	export let data;
+	$: pathname = data.pathname;
+
+	const duration = 200;
+	const delay = duration + 100;
+	const offset = 10;
+	const opacity = 0.2;
+	const amount = 15;
+	const easingIn = cubicIn;
+	const easingOut = cubicOut;
+
+	const transitions = {
+		fly: {
+			in: { delay: delay, duration: duration, easing: easingOut, y: -offset, opacity: opacity },
+			out: { duration: duration, easing: easingIn, y: offset, opacity: opacity }
+		},
+		blur: {
+			in: { delay: delay, duration: duration, easing: easingOut, amount: amount, opacity: opacity },
+			out: { duration: duration, easing: easingIn, amount: amount, opacity: opacity }
+		}
+	};
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="min-h-fit min-w-fit bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text smooth-trans-8">
+<div class="min-h-fit min-w-fit overflow-clip bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text smooth-trans-8">
 	<Navbar />
-	<main class="min-h-screen smooth-trans-8">
-		<slot />
-	</main>
+	{#key pathname}
+		<main
+			in:blur={transitions.blur.in}
+			out:blur={transitions.blur.out}
+			class="min-h-screen smooth-trans-8"
+		>
+			<slot />
+		</main>
+	{/key}
 	<Footer />
 </div>
 

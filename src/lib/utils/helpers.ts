@@ -58,7 +58,7 @@ export function getProjects(count: number) {
 					: i % 5 === 0
 					? 'Lorem ipsum dolor sit.'
 					: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem Lorem ipsum dolor sit amet, consectetur adipiscing elit dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit amet, consectetur adipiscing elit.',
-			tags: ['SvelteKit', 'TypeScript', 'Tailwind', 'Vite', 'Node'].slice(
+			tags: ['sveltekit', 'typescript', 'tailwind', 'vite', 'node'].slice(
 				0,
 				Math.floor(Math.random() * 4) + 2
 			),
