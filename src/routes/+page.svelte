@@ -7,8 +7,8 @@
 	class="section grid-responsive smooth-trans-8 bg-light-background pb-[10vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
 >
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
-		<h1 class="title-sizing smooth-trans-8 font-bold">
-			Hey , I'm <span class="text-light-primary dark:text-dark-primary">Farhan!</span>
+		<h1 class="font-bold title-font title-sizing smooth-trans-8">
+			Hey, I'm <span class="text-light-primary dark:text-dark-primary">Farhan!</span>
 		</h1>
 
 		<p
@@ -20,21 +20,33 @@
 			<span class="text-light-primary dark:text-dark-primary"> TailwindCSS</span>.
 		</p>
 		<div class="flex items-center gap-3 sm:gap-[2vw]">
-			<a href="#" class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-3 hover:tilt-zoom-1">
+			<a 
+				href="https://github.com/mfarhanz" 
+				class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
+				target="_blank" rel="noopener noreferrer"
+			>
 				<Github class="icon-sizing-1" />
-				<span class="text-sizing-0 text-light-text dark:text-dark-text link-hover smooth-trans-3">GitHub</span>
+				<span class="text-sizing-0 text-light-text dark:text-dark-text link-hover smooth-trans-2">GitHub</span>
 			</a>
 
 			<div class="h-[2vh] w-px bg-light-text/30 dark:bg-dark-text/30"></div>
 
-			<a href="#" class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-3 hover:tilt-zoom-1">
+			<a 
+				href="https://www.linkedin.com/in/mfarhanz" 
+				class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
+				target="_blank" rel="noopener noreferrer"
+			>
 				<Linkedin class="icon-sizing-1" />
-				<span class="text-sizing-0 text-center text-light-text dark:text-dark-text link-hover smooth-trans-3">LinkedIn</span>
+				<span class="text-sizing-0 text-center text-light-text dark:text-dark-text link-hover smooth-trans-2">LinkedIn</span>
 			</a>
 
 			<div class="h-[2vh] w-px bg-light-text/30 dark:bg-dark-text/30"></div>
 
-			<a href="#" class="flex items-center icon-button link-hover smooth-trans-3 hover:tilt-zoom-1">
+			<a 
+				href="mailto:mfz.bin@gmail.com" 
+				class="flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
+				target="_blank" rel="noopener noreferrer"
+			>
 				<Mail class="icon-sizing-1" />
 			</a>
 		</div>
@@ -42,7 +54,7 @@
 </section>
 
 <section class="section pb-[8vh] gap-[4vh]">
-	<h2 class="font-medium subtitle-sizing-2">
+	<h2 class="font-medium subtitle-font subtitle-sizing-2">
 		Some Stuff I've Made...
 	</h2>
 	<ProjectsSection count={4} />

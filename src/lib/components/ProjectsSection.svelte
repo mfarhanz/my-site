@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getProjects } from '$lib/utils/helpers'
+  import { getProjects } from '$lib/utils/helpers';
 
   export let count: number = 5 // default to 5 for Home page
   const images = getProjects(count)

@@ -7,17 +7,5 @@
 html {
   scroll-behavior: smooth;
   overflow-y: overlay;
-    /* font-family: 'Dosis', sans-serif;  */
-
-    /* font-family: 'Jost', sans-serif; */
-    /* font-family: 'Molengo', sans-serif; */
-
-    /* font-family: 'Exo', sans-serif; */
-    font-family: 'Google Sans Code', sans-serif;
-    /* font-family: 'Jura', sans-serif; */
-    /* font-family: 'Saira', sans-serif; */
-    
-    /* font-family: 'M PLUS Rounded 1c', sans-serif; */
-    /* font-family: 'Fira Sans', sans-serif;  */
-    /* font-family: 'Sen', sans-serif; */
+  font-family: 'Sen', sans-serif;
 }

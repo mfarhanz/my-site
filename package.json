@@ -39,6 +39,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"lucide-svelte": "^0.545.0"
+		"lucide-svelte": "^0.545.0",
+		"node-mailjet": "^6.0.9"
 	}
 }

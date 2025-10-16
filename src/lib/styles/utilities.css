@@ -93,6 +93,26 @@
     @apply transition-all duration-2000 ease-in-out;
 }
 
+.site-title-font {
+    font-family: 'Oxanium', sans-serif;
+    /* font-family: 'Funnel Display', sans-serif; */
+}
+
+.title-font {
+    font-family: 'Google Sans Code', sans-serif;
+}
+
+.subtitle-font {
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.button-text-font {
+    /* font-family: 'Exo', sans-serif; */
+    font-family: 'Andika', sans-serif;
+    /* font-family: 'Jost', sans-serif; */
+    /* font-family: 'Jura', sans-serif; */
+}
+
 .text-sizing-0 {
     @apply text-[clamp(0rem,3.6vw,10rem)] md:text-[clamp(0rem,2vw,10rem)] lg:text-[clamp(0rem,1.2vw,10rem)];
 }
