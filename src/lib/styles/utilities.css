@@ -165,6 +165,10 @@
     @apply relative text-light-text dark:text-dark-text;
 }
 
+.standard-button {
+    @apply w-[50%] self-start rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs border-2 border-light-glow-accent dark:border-dark-secondary;
+}
+
 .link-hover {
     @apply hover:text-light-primary dark:hover:text-dark-primary;
 }
@@ -175,4 +179,8 @@
 
 .nav-link.active {
     @apply text-light-accent dark:text-dark-accent text-shadow-[0_0_5px_var(--light-glow-accent),0_0_5px_var(--light-glow-accent)] dark:text-shadow-[0_0_5px_var(--dark-glow-accent),0_0_5px_var(--dark-glow-accent)];
+}
+
+.input-field {
+    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
 }

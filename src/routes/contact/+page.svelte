@@ -10,7 +10,7 @@
 		status = 'sending';
 		try {
 			const controller = new AbortController();
-			const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
+			const timeout = setTimeout(() => controller.abort(), 10000);
 
 			const res = await fetch(`${API_BASE}/contact`, {
 				method: 'POST',
@@ -34,15 +34,38 @@
 		} catch (err) {
 			if (err instanceof Error) {
 				if (err.name === 'AbortError') {
-				console.error('Request timed out')
+					console.error('Request timed out');
 				} else {
-				console.error('Network error:', err)
+					console.error('Network error:', err);
 				}
 			} else {
-				console.error('Unknown error', err)
+				console.error('Unknown error', err);
 			}
-			status = 'error'
+			status = 'error';
 		}
+	}
+
+	async function handleFakeSubmit() {
+		status = 'sending';
+		// fake delay to simulate API call
+		const randomDelay = Math.floor(Math.random() * (8500 - 1000 + 1)) + 1000;
+		await new Promise((resolve) => setTimeout(resolve, randomDelay));
+		// simulate success (or swap to 'error' to test failure)
+		status = 'sent';
+	}
+
+	function autoResize(node: HTMLTextAreaElement) {
+		const resize = () => {
+			node.style.height = 'auto';
+			node.style.height = `${node.scrollHeight}px`;
+		};
+		node.addEventListener('input', resize);
+		resize();
+		return {
+			destroy() {
+				node.removeEventListener('input', resize);
+			}
+		};
 	}
 </script>
 
@@ -54,45 +77,70 @@
 		<p
 			class="text-sizing-2 smooth-trans-8 w-full text-light-text/80 dark:text-dark-text/80 md:w-[90%] lg:w-[85%]"
 		>
-			Interested in collaborating, hiring, or discussing a project?<br />Send me a message and I’ll
+			Interested in collaborating, hiring, or discussing a project?<br />Send me a message and I'll
 			get back to you soon.
 		</p>
 
-		<form on:submit|preventDefault={handleSubmit} class="mt-6 flex w-full max-w-md flex-col gap-4">
+		<form
+			on:submit|preventDefault={handleSubmit}
+			class="mt-[4vh] flex w-full max-w-[70vw] flex-col gap-[2vh] sm:gap-[2vh] md:max-w-[55vw] md:gap-[1.8vh] lg:gap-[2vh]"
+		>
 			<input
 				bind:value={name}
 				required
 				type="text"
 				placeholder="Your Name"
-				class="smooth-trans-4 rounded-md bg-light-background-button p-3 dark:bg-dark-background-button"
+				class="text-sizing-1 input-field smooth-trans-4"
 			/>
 			<input
 				bind:value={email}
 				required
 				type="email"
 				placeholder="Your Email"
-				class="smooth-trans-4 rounded-md bg-light-background-button p-3 dark:bg-dark-background-button"
+				class="text-sizing-1 input-field smooth-trans-4"
 			/>
 			<textarea
 				bind:value={message}
 				required
-				rows="5"
+				rows="3"
+				use:autoResize
 				placeholder="Your Message"
-				class="smooth-trans-4 rounded-md bg-light-background-button p-3 dark:bg-dark-background-button"
+				class="text-sizing-1 input-field smooth-trans-4 resize-none overflow-hidden"
 			></textarea>
 			<button
 				type="submit"
-				class="smooth-trans-4 rounded-md bg-light-accent px-4 py-2 text-light-background hover:scale-[1.03] dark:bg-dark-accent dark:text-dark-background"
+				class="standard-button button-text-sizing hover:scale-[1.04] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
 				disabled={status === 'sending'}
 			>
-				{status === 'sending' ? 'Sending...' : 'Send Message'}
+				{#if status === 'sending'}
+					<span class="inline-flex items-center gap-[0.5vw]">
+						<span class="loading-dots">
+							{#each Array(14) as _, i}
+								<span class= "text-light-accent dark:text-dark-accent" style="animation-delay: {i * 0.2}s">▌</span>
+							{/each}
+						</span>
+					</span>
+				{:else if status === 'sent'}
+					<span class="text-green-800 dark:text-green-600">🗸 Sent!</span>
+				{:else if status === 'error'}
+					<span class="text-red-900">✗ Failed</span>
+				{:else}
+					Send Message
+				{/if}
 			</button>
-
-			{#if status === 'sent'}
-				<p class="mt-2 text-green-600">✅ Message sent successfully!</p>
-			{:else if status === 'error'}
-				<p class="mt-2 text-red-600">❌ Something went wrong. Try again later.</p>
-			{/if}
 		</form>
 	</div>
 </section>
+
+<style>
+	.loading-dots {
+		display: inline-flex;
+	}
+	.loading-dots span {
+		animation: blink 3.5s linear infinite both;
+	}
+	@keyframes blink {
+		0%, 100% { opacity: 0; }
+		40% { opacity: 1; }
+	}
+</style>
