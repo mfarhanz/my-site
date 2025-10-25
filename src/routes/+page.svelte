@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
 	// import ContentSection from '$lib/components/ContentSection.svelte';
 </script>
@@ -57,5 +57,7 @@
 	<h2 class="font-medium subtitle-font subtitle-sizing-2">
 		About Me
 	</h2>
-	<!-- <ContentSection items={projects} /> -->
-</section>
+</section> -->
+
+<h1>Hello Cloudflare SSR!</h1>
+<p>If you see this, SSR works.</p>
