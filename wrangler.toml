@@ -1,0 +1,7 @@
+name = "my-site"
+main = ".svelte-kit/cloudflare/_worker.js"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm run build"
+upload_format = "service-worker"
