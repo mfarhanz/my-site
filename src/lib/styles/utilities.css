@@ -65,7 +65,7 @@
     @apply transition-all duration-300 ease-in-out;
 }
 
-.smooth-trans-4 {
+.smooth-trans-4, pre, code, strong, em, a {
     @apply transition-all duration-500 ease-in-out;
 }
 
@@ -102,22 +102,20 @@
     font-family: 'Google Sans Code', sans-serif;
 }
 
-.subtitle-font {
+.subtitle-font, h1, h2 {
     font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .button-text-font {
     /* font-family: 'Exo', sans-serif; */
     font-family: 'Andika', sans-serif;
-    /* font-family: 'Jost', sans-serif; */
-    /* font-family: 'Jura', sans-serif; */
 }
 
-.text-sizing-0 {
+.text-sizing-0, .prose, th, td {
     @apply text-[clamp(0rem,3.6vw,10rem)] md:text-[clamp(0rem,2vw,10rem)] lg:text-[clamp(0rem,1.2vw,10rem)];
 }
 
-.text-sizing-1 {
+.text-sizing-1, p, li, ul {
     @apply text-[clamp(0rem,4.3vw,10rem)] md:text-[clamp(0rem,2.2vw,10rem)] lg:text-[clamp(0rem,1.4vw,10rem)];
 }
 
@@ -125,11 +123,15 @@
     @apply text-[clamp(0rem,5.1vw,10rem)] md:text-[clamp(0rem,2.7vw,10rem)] lg:text-[clamp(0rem,1.7vw,10rem)];
 }
 
-.subtitle-sizing-1 {
-    @apply text-[clamp(1rem,4.5vw,10rem)] md:text-[clamp(1rem,2.5vw,10rem)] lg:text-[clamp(1rem,2vw,10rem)];
+.subtitle-sizing-0, h3 {
+    @apply text-[clamp(1rem,4vw,10rem)] md:text-[clamp(1rem,2vw,10rem)] lg:text-[clamp(1rem,1.6vw,10rem)];
 }
 
-.subtitle-sizing-2 {
+.subtitle-sizing-1, h2 {
+    @apply text-[clamp(1rem,5vw,10rem)] md:text-[clamp(1rem,3vw,10rem)] lg:text-[clamp(1rem,2vw,10rem)];
+}
+
+.subtitle-sizing-2, h1 {
     @apply text-[clamp(1rem,5.8vw,10rem)] md:text-[clamp(1rem,4vw,10rem)] lg:text-[clamp(1rem,2.4vw,10rem)];
 }
 
@@ -166,7 +168,7 @@
 }
 
 .standard-button {
-    @apply w-[50%] self-start rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs border-2 border-light-glow-accent dark:border-dark-secondary;
+    @apply w-[65%] md:w-[50%] self-start rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs border-2 border-light-glow-accent dark:border-dark-secondary;
 }
 
 .link-hover {
@@ -183,4 +185,13 @@
 
 .input-field {
     @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
+}
+
+.prose pre,
+.prose table {
+  @apply block overflow-x-auto max-w-[75vw];
+}
+
+.prose pre {
+    @apply rounded-[3vh];
 }

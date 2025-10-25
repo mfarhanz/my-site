@@ -1,15 +1,12 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { blur, fly } from 'svelte/transition';
 	import { cubicIn, cubicOut } from 'svelte/easing';
 	
-	let children;	// ✅ Get slotted children correctly in Svelte 5
-
-	export let data;
-	$: pathname = data.pathname;
+	let { children, data } = $props();
+	let pathname = $derived(data.pathname);
 
 	const duration = 200;
 	const delay = duration + 100;
@@ -32,7 +29,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
 <div class="min-h-fit min-w-fit overflow-clip bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text smooth-trans-8">
@@ -43,7 +40,7 @@
 			out:blur={transitions.blur.out}
 			class="min-h-screen smooth-trans-8"
 		>
-			<slot />
+			{@render children?.()}
 		</main>
 	{/key}
 	<Footer />

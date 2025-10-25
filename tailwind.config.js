@@ -1,6 +1,8 @@
+import typography from '@tailwindcss/typography'
+
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: "class", // ✅ Still needed for class-based dark mode
+    darkMode: "class",
     content: [
         "./src/**/*.{html,js,svelte,ts}",
         "./node_modules/@sveltejs/kit/**/*.{js,ts}",
@@ -9,13 +11,13 @@ export default {
         extend: {
             colors: {
                 light: {
-                    background: '#e7d7ff',
+                    background: '#ebddff',
                     'background-trans': '#ddd0f088',
                     'background-button': '#c5afec88',
                     drawer: '#d1c2ec33',
                     text: '#2c254d',
                     'text-muted': '#6f6785',
-                    'text-highlighted': '#ffebbc',
+                    'text-highlighted': '#5031ff',
                     primary: '#8b5cf6',
                     secondary: '#a68ef0',
                     accent: '#7c3aed',
@@ -43,9 +45,69 @@ export default {
                     'scroll-hover': '#a78bfa',
                     'glow-accent': '#22d3eeff',
                 },
-            }
-
-
+            },
+            typography: ({ theme }) => ({
+                DEFAULT: {
+                    css: {
+                        color: theme('colors.light.text'),
+                        lineHeight: 1.8,
+                        maxWidth: '100%',
+                        a: {
+                            color: theme('colors.light.accent'),
+                            textDecoration: 'none',
+                            '&:hover': { color: theme('colors.light.highlighted') }
+                        },
+                        li: {
+                            lineHeight: 1.5,
+                        },
+                        h1: {
+                            color: theme('colors.light.primary'),
+                            fontWeight: '400',
+                            marginBottom: '1em',
+                        },
+                        h2: {
+                            color: theme('colors.light.primary'),
+                            fontWeight: '400',
+                            marginBottom: '0.6em',
+                        },
+                        h3: {
+                            color: theme('colors.light.primary'),
+                            fontWeight: '400',
+                        },
+                        strong: {
+                            color: theme('colors.light.text'),
+                            fontWeight: '750',
+                        },
+                    }
+                },
+                invert: {
+                    css: {
+                        color: theme('colors.dark.text'),
+                        a: {
+                            color: theme('colors.dark.accent'),
+                            textDecoration: 'none',
+                            '&:hover': { color: theme('colors.dark.highlighted') }
+                        },
+                        h1: {
+                            color: theme('colors.dark.primary'),
+                            fontWeight: '400',
+                        },
+                        h2: {
+                            color: theme('colors.dark.primary'),
+                            fontWeight: '400',
+                        },
+                        h3: {
+                            color: theme('colors.dark.primary'),
+                            fontWeight: '400',
+                        },
+                        strong: {
+                            color: theme('colors.dark.text'),
+                            fontWeight: '750',
+                        },
+                    }
+                }
+            })
         },
     },
+    plugins: [typography],
 };

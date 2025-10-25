@@ -1,7 +1,7 @@
 <script lang="ts">
   import { clickOutside } from '$lib/utils/helpers'
 	import { darkMode } from '$lib/stores/theme';
-	import { toggleTheme } from '$lib/utils/themeToggle';
+	import { toggleTheme } from '$lib/utils/theme-toggle';
     import { Sun, Moon, Menu, X} from 'lucide-svelte';
     import { page } from '$app/stores';
 

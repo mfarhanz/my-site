@@ -1,9 +1,30 @@
-<script>
-  import ProjectsSection from '$lib/components/ProjectsSection.svelte'
+<script lang="ts">
+    import ContectSection from '$lib/components/ContentSection.svelte';
+	import { projectsStore } from '$lib/stores/projects';
+    import type { Project } from '$lib/types/project'
+
+	// let { data } = $props(); // this comes from +page.server.ts automatically
+	// const projects: ContentItem[] = data.projects.map((p) => ({
+	// 	src: p.image || '/lib/assets/projects/default.png',
+	// 	description: p.description ?? 'No description available.',
+	// 	tags: p.tags ?? [],
+	// 	route: `/projects/${p.slug}`
+	// }));
+
+	export let data;
+	// initialize the store if empty or null
+	projectsStore.update((current) => (current && current.length ? current : (data.projects ?? [])));
+	$: projects = ($projectsStore ?? []).map((p: Project) => ({
+		src: p.image,
+		description: p.description ?? 'No description available.',
+		tags: p.tags ?? [],
+		route: `/projects/${p.slug}`
+	}));
 </script>
 
-
-<section class="section pb-[8vh] pt-[9vh] gap-[4vh] bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text smooth-trans-8">
-  <h1 class="font-bold title-font title-sizing smooth-trans-8">Projects</h1>
-	<ProjectsSection count={12} />
+<section
+	class="section smooth-trans-8 gap-[4vh] bg-light-background pb-[8vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
+>
+	<h1 class="title-font title-sizing smooth-trans-8 font-bold">Projects</h1>
+	<ContectSection items={projects} />
 </section>

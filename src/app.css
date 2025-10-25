@@ -9,3 +9,13 @@ html {
   overflow-y: overlay;
   font-family: 'Sen', sans-serif;
 }
+
+html:not(.dark) .code-light {
+  @import 'prism-themes/themes/prism-material-light.css';
+  /* @import 'prism-themes/themes/prism-one-light.css'; */
+}
+
+html.dark .code-dark {
+  /* @import 'prism-themes/themes/prism-material-dark.css'; */
+  @import 'prism-themes/themes/prism-material-oceanic.css';
+}

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
-	import ProjectsSection from '$lib/components/ProjectsSection.svelte';
+	// import ContentSection from '$lib/components/ContentSection.svelte';
 </script>
 
 <section
@@ -8,7 +8,7 @@
 >
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
 		<h1 class="font-bold title-font title-sizing smooth-trans-8">
-			Hey, I'm <span class="text-light-primary dark:text-dark-primary">Farhan!</span>
+			Hey! I'm <span class="text-light-primary dark:text-dark-primary">Farhan</span>
 		</h1>
 
 		<p
@@ -55,7 +55,7 @@
 
 <section class="section pb-[8vh] gap-[4vh]">
 	<h2 class="font-medium subtitle-font subtitle-sizing-2">
-		Some Stuff I've Made...
+		About Me
 	</h2>
-	<ProjectsSection count={4} />
+	<!-- <ContentSection items={projects} /> -->
 </section>
