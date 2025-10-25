@@ -36,6 +36,10 @@ In [Agno](https://github.com/agno-agi/agno), we solved this by implementing grac
 
 This is how Agno handles most streaming cancellations. Monitor the HTTP request for disconnect messages:
 
+```java
+balls and balls
+```
+
 ```python
 async def chat_message(request: Request):
     async def generate_response():

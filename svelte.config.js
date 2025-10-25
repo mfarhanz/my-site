@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import mdsvexConfig from './mdsvex.config.js';
 import { mdsvex } from 'mdsvex'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
@@ -9,11 +9,12 @@ const config = {
   preprocess: [vitePreprocess(), mdsvex(mdsvexConfig)],
 
   kit: {
-    adapter: adapter({
-      pages: 'build',
-      assets: 'build',
-      fallback: 'index.html'
-    }),
+    // adapter: adapter({
+    //   pages: 'build',
+    //   assets: 'build',
+    //   fallback: 'index.html'
+    // }),
+    adapter: adapter(),
     paths: {
       base: ''
     },

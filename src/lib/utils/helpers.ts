@@ -48,7 +48,6 @@ export function clickOutside(node: HTMLElement) {
     }
 }
 
-
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
 
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
