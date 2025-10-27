@@ -4,7 +4,6 @@
 	import { CalendarDays } from 'lucide-svelte';
 	
 	let { data }: { data: { content: any; meta: Project } } = $props();
-	console.log(data);
 </script>
 
 <svelte:head>

@@ -10,6 +10,11 @@ async function getAllContent() {
     const paths = import.meta.glob<MarkdownModule<Omit<Project, 'slug'>>>('../../../content/projects/*.md', { eager: true })
     const entries: Project[] = []
 
+    const banners = import.meta.glob('/src/lib/assets/projects/*.{png,jpg,jpeg,gif}', {
+        eager: true,
+        import: 'default'
+    }) as Record<string, string>
+
     for (const path in paths) {
         const file = paths[path]
         const slug = path.split('/').at(-1)?.replace('.md', '')
@@ -23,12 +28,8 @@ async function getAllContent() {
             const content = fs.readFileSync(absPath, 'utf-8')
             metadata = matter(content).data as Omit<Project, 'slug'>
         }
+        
         if (metadata?.published && slug) {
-            const banners = import.meta.glob('/src/lib/assets/projects/*.{png,jpg,jpeg,gif}', {
-                eager: true,
-                import: 'default'
-            }) as Record<string, string>
-
             const match = Object.entries(banners).find(([path]) =>
                 path.includes(`${slug}.`)
             )

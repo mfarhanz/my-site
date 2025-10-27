@@ -3,9 +3,9 @@
 	import { projectsStore } from '$lib/stores/projects';
     import type { Project } from '$lib/types/project'
 
-	// let { data } = $props(); // this comes from +page.server.ts automatically
+	// let { data } = $props();
 	// const projects: ContentItem[] = data.projects.map((p) => ({
-	// 	src: p.image || '/lib/assets/projects/default.png',
+	// 	src: p.image,
 	// 	description: p.description ?? 'No description available.',
 	// 	tags: p.tags ?? [],
 	// 	route: `/projects/${p.slug}`

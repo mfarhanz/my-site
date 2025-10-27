@@ -10,6 +10,11 @@ async function getAllContent() {
     const paths = import.meta.glob<MarkdownModule<Omit<Note, 'slug'>>>('../../../content/notes/*.md', { eager: true })
     const entries: Note[] = []
 
+    const banners = import.meta.glob('/src/lib/assets/notes/*.{png,jpg,jpeg,gif}', {
+        eager: true,
+        import: 'default'
+    }) as Record<string, string>
+
     for (const path in paths) {
         const file = paths[path]
         const slug = path.split('/').at(-1)?.replace('.md', '')
@@ -25,11 +30,6 @@ async function getAllContent() {
         }
 
         if (metadata?.published && slug) {
-            const banners = import.meta.glob('/src/lib/assets/notes/*.{png,jpg,jpeg,gif}', {
-                eager: true,
-                import: 'default'
-            }) as Record<string, string>
-
             const match = Object.entries(banners).find(([path]) =>
                 path.includes(`${slug}.`)
             )
