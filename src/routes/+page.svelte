@@ -25,7 +25,7 @@
 				class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
 				target="_blank" rel="noopener noreferrer"
 			>
-				<Github class="icon-sizing-1" />
+				<Github class="icon-sizing-2" />
 				<span class="text-sizing-0 text-light-text dark:text-dark-text link-hover smooth-trans-2">GitHub</span>
 			</a>
 

@@ -2,10 +2,16 @@
 	import { goto } from '$app/navigation';
 	import type { ContentItem } from '$lib/types/content';
 	import { randomBetween } from '$lib/utils/helpers';
+
 	export let item: ContentItem;
 
 	function openContentPage() {
-		if (item.route) goto(item.route);
+		if (!item.route) return;
+		if (document.startViewTransition) {
+			document.startViewTransition(() => goto(item.route!));
+		} else {
+			goto(item.route!);
+		}
 	}
 </script>
 
@@ -19,8 +25,15 @@
 			sm:gap-[1.2vw] md:p-[2vw] lg:p-[1vw]`}
 >
 	{#if item.src}
-		<div class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}>
-			<img src={item.src} alt="project" class="h-full w-full rounded-xl object-cover" />
+		<div
+			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
+			style={`view-transition-name: project-image-${item.route?.split('/').pop()};`}
+		>
+			<img
+				src={item.src}
+				alt="project"
+				class="smooth-trans-8 h-full w-full rounded-xl object-cover"
+			/>
 		</div>
 	{/if}
 

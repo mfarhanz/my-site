@@ -1,3 +1,5 @@
+import { goto } from '$app/navigation';
+
 export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
@@ -54,4 +56,12 @@ export function formatDate(date: string, dateStyle: DateStyle = 'medium', locale
     const dateToFormat = new Date(date.replaceAll('-', '/'))
     const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
     return dateFormatter.format(dateToFormat)
+}
+
+export function runViewTransition(to: string) {
+    if (document.startViewTransition) {
+        document.startViewTransition(() => goto(to));
+    } else {
+        goto(to);
+    }
 }

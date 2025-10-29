@@ -9,7 +9,6 @@ export interface Project {
 	links?: {
 		text: string
 		url: string
-		icon?: string
 	}[]
     image?: string
 }

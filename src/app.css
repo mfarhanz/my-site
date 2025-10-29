@@ -19,3 +19,16 @@ html.dark .code-dark {
   /* @import 'prism-themes/themes/prism-material-dark.css'; */
   @import 'prism-themes/themes/prism-material-oceanic.css';
 }
+
+::view-transition-group(*) {
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+}
+
+::view-transition-old(project-image-gofish),
+::view-transition-new(project-image-gofish) {
+  object-fit: contain;
+  border-radius: 2rem;
+  overflow: clip;
+  transform-origin: center center;
+}

@@ -8,7 +8,7 @@ published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/filterkit"
-  - text: "Live Demo"
+  - text: "PyPi"
     url: "#"
     icon: "external"
 ---

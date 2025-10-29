@@ -8,9 +8,6 @@ published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/cool-counter"
-  - text: "Live Demo"
-    url: "#"
-    icon: "external"
 ---
 
 # About the Project
