@@ -27,7 +27,7 @@
 	{#if item.src}
 		<div
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
-			style={`view-transition-name: project-image-${item.route?.split('/').pop()};`}
+			style:--tag={item.route?.split('/').pop()}
 		>
 			<img
 				src={item.src}

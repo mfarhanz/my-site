@@ -1,3 +1,4 @@
+/* eslint-disable svelte/no-navigation-without-resolve */
 import { goto } from '$app/navigation';
 
 export function randomBetween(min: number, max: number) {
@@ -51,7 +52,6 @@ export function clickOutside(node: HTMLElement) {
 }
 
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
-
 export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
     const dateToFormat = new Date(date.replaceAll('-', '/'))
     const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
@@ -65,3 +65,17 @@ export function runViewTransition(to: string) {
         goto(to);
     }
 }
+
+import { onNavigate } from '$app/navigation';
+export const preparePageTransition = () => {
+	onNavigate(async (navigation) => {
+		if (!document.startViewTransition) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
+};

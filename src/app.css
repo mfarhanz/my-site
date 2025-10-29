@@ -20,7 +20,7 @@ html.dark .code-dark {
   @import 'prism-themes/themes/prism-material-oceanic.css';
 }
 
-::view-transition-group(*) {
+/* ::view-transition-group(*) {
   animation-duration: 0.2s;
   animation-timing-function: ease-in;
 }
@@ -31,4 +31,11 @@ html.dark .code-dark {
   border-radius: 2rem;
   overflow: clip;
   transform-origin: center center;
+} */
+
+
+@media (prefers-reduced-motion: no-preference) {
+	[style*='--tag'] {
+		view-transition-name: var(--tag);
+	}
 }

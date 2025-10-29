@@ -7,22 +7,15 @@
 
 	let { data }: { data: { content: any; meta: Project; pathname: any } } = $props();
 
-	onMount(() => {
-	beforeNavigate((nav) => {
-		const from = nav.from?.url?.pathname;
-		const to = nav.to?.url?.pathname;
+	// onMount(() => {		// minimize image on using browser back button (only for this page)
+	// 	const handlePopState = (event: PopStateEvent) => {
+	// 		event.preventDefault();
+	// 		runViewTransition('/projects');
+	// 	};
 
-		if (from?.startsWith('/projects/') && to === '/projects') {
-			if (document.startViewTransition) {
-				// force the transition to start *before* SvelteKit unmounts the page
-				queueMicrotask(() => {
-					document.startViewTransition(() => {});
-				});
-			}
-		}
-	});
-});
-
+	// 	window.addEventListener('popstate', handlePopState);
+	// 	return () => window.removeEventListener('popstate', handlePopState);
+	// });
 </script>
 
 <svelte:head>
@@ -38,7 +31,7 @@
 		<img
 			src={data.meta.image}
 			alt={data.meta.title}
-			style={`view-transition-name: project-image-${data.meta.slug};`}
+			style:--tag={data.meta.slug}
 			class="absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh] smooth-trans-8"
 		/>
 		<div
