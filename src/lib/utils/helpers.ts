@@ -1,24 +1,7 @@
-/* eslint-disable svelte/no-navigation-without-resolve */
-import { goto } from '$app/navigation';
+// import { goto } from '$app/navigation';
 
 export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
-}
-
-export function makeBlankImage(fixedW = -1, fixedH = -1, minW = 240, maxW = 480, minH = 140, maxH = 320) {
-    const w = fixedW < 0 ? Math.floor(Math.random() * (maxW - minW + 1)) + minW : fixedW;
-    const h = fixedH < 0 ? Math.floor(Math.random() * (maxH - minH + 1)) + minH : fixedH;
-    const color = `hsl(${Math.floor(Math.random() * 360)}, 20%, 85%)`;
-
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
-    <rect width="100%" height="100%" fill="${color}" rx="12" ry="12" />
-  </svg>`;
-
-    return {
-        src: "data:image/svg+xml;base64," + btoa(svg),
-        width: w,
-        height: h
-    };
 }
 
 export function mergeObjects<T extends object>(merged: T, ...rest: unknown[]): T {
@@ -58,24 +41,29 @@ export function formatDate(date: string, dateStyle: DateStyle = 'medium', locale
     return dateFormatter.format(dateToFormat)
 }
 
-export function runViewTransition(to: string) {
-    if (document.startViewTransition) {
-        document.startViewTransition(() => goto(to));
-    } else {
-        goto(to);
-    }
-}
-
 import { onNavigate } from '$app/navigation';
 export const preparePageTransition = () => {
-	onNavigate(async (navigation) => {
-		if (!document.startViewTransition) return;
+    onNavigate((navigation) => {
+        // If the browser doesn't support View Transitions, just let the SvelteKit transition run
+        if (!document.startViewTransition) return;
+        
+        const indexPath = '/projects';
+        const fromPath = navigation.from?.url.pathname ?? '';
+        const toPath = navigation.to?.url.pathname ?? '';
+        const isIndex = (path: string) => path === indexPath || path === indexPath + '/';
+        const issSlug = (path: string) => path.startsWith(indexPath + '/') && path.length > indexPath.length + 1;
+        // Check for the specific cross-fade routes:
+        const isIndexToSlug = isIndex(fromPath) && issSlug(toPath);
+        const isSlugToIndex = issSlug(fromPath) && isIndex(toPath);        
 
-		return new Promise((resolve) => {
-			document.startViewTransition(async () => {
-				resolve();
-				await navigation.complete;
-			});
-		});
-	});
+        // only run the View Transition for these two routes
+        if (isIndexToSlug || isSlugToIndex) {       
+            return new Promise((resolve) => {
+                document.startViewTransition(async () => {
+                    resolve(); // Resolve the promise right before the content change
+                    await navigation.complete; // Wait for SvelteKit to update the DOM
+                });
+            });
+        }
+    });
 };

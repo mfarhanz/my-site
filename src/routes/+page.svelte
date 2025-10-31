@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
-	// import ContentSection from '$lib/components/ContentSection.svelte';
 </script>
 
 <section
@@ -57,5 +56,4 @@
 	<h2 class="font-medium subtitle-font subtitle-sizing-2">
 		About Me
 	</h2>
-	<!-- <ContentSection items={projects} /> -->
 </section>

@@ -4,6 +4,7 @@
 	import { randomBetween } from '$lib/utils/helpers';
 
 	export let item: ContentItem;
+	let isHovering = false;
 
 	function openContentPage() {
 		if (!item.route) return;
@@ -29,11 +30,25 @@
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
 			style:--tag={item.route?.split('/').pop()}
 		>
-			<img
-				src={item.src}
-				alt="project"
-				class="smooth-trans-8 h-full w-full rounded-xl object-cover"
-			/>
+			{#if item.src.endsWith('.webm')}
+				<video
+					src={item.src}
+					muted
+					playsinline
+					loop
+					on:mouseenter={(e) => e.currentTarget.play()}
+					on:mouseleave={(e) => e.currentTarget.pause()}
+					class="smooth-trans-8 h-full w-full rounded-xl object-cover"
+				></video>
+			{:else}
+				<img
+					src={item.src}
+					alt="project"
+					loading="lazy"
+					decoding="async"
+					class="smooth-trans-8 h-full w-full rounded-xl object-cover"
+				/>
+			{/if}
 		</div>
 	{/if}
 

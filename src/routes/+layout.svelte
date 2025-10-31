@@ -37,7 +37,6 @@
 >
 	<Navbar />
 	{#if /^\/projects\/[^/]+/.test(pathname)}
-		<!-- No blur or keying for project page routes -->
 		<main class="smooth-trans-8 min-h-screen">
 			{@render children?.()}
 		</main>
@@ -52,6 +51,5 @@
 			</main>
 		{/key}
 	{/if}
-
 	<Footer />
 </div>

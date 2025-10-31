@@ -41,7 +41,7 @@
 				{/if}
 			</header>
 			<div class="w-full prose dark:prose-invert code-light code-dark smooth-trans-8">
-				<svelte:component this={data.content} />
+				{@render data.content()}
 			</div>
 		</div>
 	{:else}

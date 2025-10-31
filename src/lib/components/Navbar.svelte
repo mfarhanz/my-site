@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { clickOutside, runViewTransition } from '$lib/utils/helpers';
+	import { clickOutside } from '$lib/utils/helpers';
 	import { darkMode } from '$lib/stores/theme';
 	import { toggleTheme } from '$lib/utils/theme-toggle';
 	import { Sun, Moon, Menu, X } from 'lucide-svelte';
@@ -14,20 +14,6 @@
 	];
 
 	let menuOpen = false;
-
-	function handleNavClick(linkHref: string) {
-		const currentPath = $page.url.pathname;
-        // if currently inside a project slug page, use the transition
-		if (
-			linkHref === '/projects' &&
-			currentPath.startsWith('/projects/') &&
-			currentPath !== '/projects'
-		) {
-			runViewTransition('/projects');
-		} else {
-			goto(linkHref);
-		}
-	}
 </script>
 
 <nav
@@ -51,7 +37,7 @@
 						href={link.href}
 						class="nav-link button-text-font smooth-trans-2 hover:tilt-zoom-1"
 						class:active={$page.url.pathname === link.href}
-						on:click|preventDefault={() => handleNavClick(link.href)}
+						on:click|preventDefault={() => goto(link.href)}
 					>
 						{link.name}
 					</a>
@@ -103,7 +89,7 @@
 				href={link.href}
 				class="nav-link button-text-font smooth-trans-2 tilt-zoom-0 w-full text-center"
 				class:active={$page.url.pathname === link.href}
-                on:click|preventDefault={() => handleNavClick(link.href)}
+                on:click|preventDefault={() => goto(link.href)}
 			>
 				{link.name}
 			</a>

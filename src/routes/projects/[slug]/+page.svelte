@@ -1,21 +1,9 @@
 <script lang="ts">
 	import type { Project } from '$lib/types/project';
-	import { formatDate, runViewTransition } from '$lib/utils/helpers';
+	import { formatDate } from '$lib/utils/helpers';
 	import { CalendarDays, Github, ExternalLink } from 'lucide-svelte';
-	import { onMount } from 'svelte';
-	import { beforeNavigate, goto } from '$app/navigation';
 
 	let { data }: { data: { content: any; meta: Project; pathname: any } } = $props();
-
-	// onMount(() => {		// minimize image on using browser back button (only for this page)
-	// 	const handlePopState = (event: PopStateEvent) => {
-	// 		event.preventDefault();
-	// 		runViewTransition('/projects');
-	// 	};
-
-	// 	window.addEventListener('popstate', handlePopState);
-	// 	return () => window.removeEventListener('popstate', handlePopState);
-	// });
 </script>
 
 <svelte:head>
@@ -24,21 +12,39 @@
 	<meta property="og:title" content={data.meta.title} />
 </svelte:head>
 
-<div class="relative overflow-hidden">
-	<div
-		class="h-[25vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[70vh] lg:h-[60vh] "
-	>
-		<img
-			src={data.meta.image}
-			alt={data.meta.title}
-			style:--tag={data.meta.slug}
-			class="absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh] smooth-trans-8"
-		/>
+{#if data.meta.image}
+	<div class="relative overflow-hidden">
 		<div
-			class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-light-background dark:to-dark-background smooth-trans-8"
-		></div>
+			class="smooth-trans-8 h-[25vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
+		>
+			{#if data.meta.image.endsWith('.webm')}
+				<video
+					src={data.meta.image}
+					muted
+					playsinline
+					loop
+					autoplay
+					style:--tag={data.meta.slug}
+					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
+				></video>
+			{:else}
+				<img
+					src={data.meta.image}
+					alt={data.meta.title}
+					style:--tag={data.meta.slug}
+					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
+				/>
+			{/if}
+			<div
+				class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-light-background dark:to-dark-background"
+			></div>
+		</div>
 	</div>
-</div>
+{:else}
+	<div
+		class="smooth-trans-8 h-[5vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[7vh] lg:h-[7vh]"
+	></div>
+{/if}
 
 <section
 	class="section grid-responsive smooth-trans-8 bg-light-background pb-[10vh] text-light-text dark:bg-dark-background dark:text-dark-text"
@@ -92,7 +98,7 @@
 				</div>
 			</header>
 			<div class="code-light code-dark smooth-trans-8 prose relative z-10 w-full dark:prose-invert">
-				<svelte:component this={data.content} />
+				{@render data.content()}
 			</div>
 		</div>
 	{:else}
