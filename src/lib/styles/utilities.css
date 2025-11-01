@@ -148,11 +148,11 @@
 }
 
 .icon-sizing-1 {
-    @apply w-[1.1rem] md:w-[2.5vw] lg:w-[1.5vw] h-auto;
+    @apply w-[1.1rem] sm:w-[1.5vw] md:w-[2.4vw] lg:w-[1.6vw] h-auto;
 }
 
 .icon-sizing-2 {
-    @apply w-[1.7rem] md:w-[3vw] lg:w-[2vw] h-auto;
+    @apply w-[1.7rem] sm:w-[2vw] md:w-[3vw] lg:w-[2vw] h-auto;
 }
 
 .section {
