@@ -1,4 +1,6 @@
 :root {
+    --primary: theme('colors.light.primary');
+    --secondary: theme('colors.light.secondary');
     --scroll-thumb: theme('colors.light.scroll-thumb');
     --scroll-track: theme('colors.light.scroll-track');
     --scroll-hover: theme('colors.light.scroll-hover');
@@ -8,6 +10,8 @@
 }
 
 .dark {
+    --primary: theme('colors.dark.primary');
+    --secondary: theme('colors.dark.secondary');
     --scroll-thumb: theme('colors.dark.scroll-thumb');
     --scroll-track: theme('colors.dark.scroll-track');
     --scroll-hover: theme('colors.dark.scroll-hover');
@@ -195,3 +199,39 @@
 .prose pre {
     @apply rounded-[3vh];
 }
+
+
+@layer utilities {
+  .hover-bg-slide {
+    position: relative;
+    overflow: hidden;
+  }
+  .hover-bg-slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    transform: translateX(-110%);
+    background: theme('colors.dark.primary');
+    transition: transform 0.35s ease;
+    z-index: -1;
+    opacity: 0.15;
+  }
+  .hover-bg-slide:hover::before {
+    transform: translateX(0%);
+  }
+
+
+
+  .hover-border-pulse {
+    position: relative;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease, box-shadow 0.4s ease;
+  }
+  .hover-border-pulse:hover {
+    border-color: theme('colors.light.primary');
+    box-shadow: 0 0 10px theme('colors.light.primary') inset,
+                0 0 15px theme('colors.light.primary');
+  }
+
+}
+

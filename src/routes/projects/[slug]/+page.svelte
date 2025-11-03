@@ -2,8 +2,40 @@
 	import type { Project } from '$lib/types/project';
 	import { formatDate } from '$lib/utils/helpers';
 	import { CalendarDays, Github, ExternalLink } from 'lucide-svelte';
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
 	let { data }: { data: { content: any; meta: Project; pathname: any } } = $props();
+	let shouldTag = $state(false);
+
+	beforeNavigate(({ from, to }) => {
+		// if navigating out of a /projects/[slug]
+		let fromUrl = from?.url?.pathname;
+		let toUrl = to?.url?.pathname;
+		if (
+			fromUrl?.startsWith('/projects/') &&
+			fromUrl.length > '/projects/'.length &&
+			toUrl === '/projects'
+		) {
+			shouldTag = true;
+		} else {
+			shouldTag = false;
+		}
+	});
+
+	afterNavigate(({ from, to }) => {
+		// if navigating into a /projects/[slug]
+		let fromUrl = from?.url?.pathname;
+		let toUrl = to?.url?.pathname;
+		if (
+			fromUrl === '/projects' &&
+			toUrl?.startsWith('/projects/') &&
+			toUrl.length > '/projects/'.length
+		) {
+			shouldTag = true;
+		} else {
+			shouldTag = false;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -24,17 +56,18 @@
 					playsinline
 					loop
 					autoplay
-					style:--tag={data.meta.slug}
+					style={shouldTag ? `--tag:${data.meta.slug}` : undefined}
 					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
 				></video>
 			{:else}
 				<img
 					src={data.meta.image}
 					alt={data.meta.title}
-					style:--tag={data.meta.slug}
+					style={shouldTag ? `--tag:${data.meta.slug}` : undefined}
 					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
 				/>
 			{/if}
+			<!-- style:--tag={data.meta.slug} -->
 			<div
 				class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-light-background dark:to-dark-background"
 			></div>

@@ -7,6 +7,40 @@
 	let isHovering = false;
 	let videoEl: HTMLVideoElement;
 
+	import { beforeNavigate, afterNavigate } from '$app/navigation';
+
+	let shouldTag = false;
+
+	beforeNavigate(({ from, to }) => {
+		// when navigation transition starts when going out of projects/ or notes/
+		let fromUrl = from?.url?.pathname;
+		let toUrl = to?.url?.pathname;
+		if (
+			fromUrl === '/projects' &&
+			toUrl?.startsWith('/projects/') &&
+			toUrl.length > '/projects/'.length
+		) {
+			shouldTag = true;
+		} else {
+			shouldTag = false;
+		}
+	});
+
+	afterNavigate(({ from, to }) => {
+		// when navigation transition ends when going into projects/ or notes/
+		let fromUrl = from?.url?.pathname;
+		let toUrl = to?.url?.pathname;
+		if (
+			fromUrl?.startsWith('/projects/') &&
+			fromUrl.length > '/projects/'.length &&
+			toUrl === '/projects'
+		) {
+			shouldTag = true;
+		} else {
+			shouldTag = false;
+		}
+	});
+
 	function openContentPage() {
 		if (!item.route) return;
 		goto(item.route!);
@@ -14,8 +48,8 @@
 
 	$: {
 		if (videoEl) {
-			if (isHovering) videoEl.play()
-			else videoEl.pause()
+			if (isHovering) videoEl.play();
+			else videoEl.pause();
 		}
 	}
 </script>
@@ -27,14 +61,14 @@
 	on:keydown={(e) => e.key === 'Enter' && openContentPage()}
 	on:mouseenter={() => (isHovering = true)}
 	on:mouseleave={() => (isHovering = false)}
-	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full break-inside-avoid flex-col gap-4 overflow-hidden 
+	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full break-inside-avoid cursor-pointer flex-col gap-4 overflow-hidden 
 			rounded-[3vh] bg-light-background-button p-[3vw] shadow-md backdrop-blur-md hover:scale-[1.07] active:scale-[0.98] dark:bg-dark-background-button 
 			sm:gap-[1.2vw] md:p-[2vw] lg:p-[1vw]`}
 >
 	{#if item.src}
 		<div
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
-			style:--tag={item.route?.split('/').pop()}
+			style={shouldTag ? `--tag:${item.route?.split('/').pop()}` : undefined}
 		>
 			{#if item.src.endsWith('.webm')}
 				<video

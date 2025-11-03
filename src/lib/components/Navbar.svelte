@@ -5,6 +5,10 @@
 	import { Sun, Moon, Menu, X } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { derived } from 'svelte/store';
+	
+	let menuOpen = false;
+	const isHome = derived(page, ($page) => $page.url.pathname === '/');
 
 	const navLinks = [
 		{ name: 'Home', href: '/' },
@@ -12,19 +16,27 @@
 		{ name: 'Notes', href: '/notes' },
 		{ name: 'Contact', href: '/contact' }
 	];
-
-	let menuOpen = false;
 </script>
 
 <nav
 	class="smooth-trans-8 sticky top-0 z-50 flex w-full items-center justify-between bg-light-background-trans px-[12vw] py-[1.5vh] backdrop-blur dark:bg-dark-background-trans md:py-[1vh] lg:py-[2.2vh]"
 >
-	<a
-		href="/"
-		class="subtitle-sizing-1 site-title-font smooth-trans-8 pr-4 font-bold text-light-primary dark:text-dark-primary"
-	>
-		Farhan Zia
-	</a>
+	<div class="flex items-center gap-3">
+		<img
+			src="https://avatars.githubusercontent.com/u/51290906?v=4"
+			alt="Farhan"
+			class="smooth-trans-8 h-[36px] w-[36px] rounded-full object-cover shadow-md md:h-[42px] md:w-[42px]"
+			style:--tag="github-avatar"
+			class:hidden={$isHome}
+		/>
+
+		<a
+			href="/"
+			class="subtitle-sizing-1 site-title-font smooth-trans-8 glow-title pr-4 font-bold text-light-primary dark:text-dark-primary"
+		>
+			Farhan Zia
+		</a>
+	</div>
 
 	<div class="flex items-center gap-[2vw]">
 		<!-- Desktop Nav -->
@@ -35,7 +47,7 @@
 				<li class="flex w-full sm:w-auto">
 					<a
 						href={link.href}
-						class="nav-link button-text-font smooth-trans-2 hover:tilt-zoom-1"
+						class="nav-link button-text-font smooth-trans-3 hover-bg-slide"
 						class:active={$page.url.pathname === link.href}
 						on:click|preventDefault={() => goto(link.href)}
 					>
@@ -89,10 +101,18 @@
 				href={link.href}
 				class="nav-link button-text-font smooth-trans-2 tilt-zoom-0 w-full text-center"
 				class:active={$page.url.pathname === link.href}
-                on:click|preventDefault={() => goto(link.href)}
+				on:click|preventDefault={() => goto(link.href)}
 			>
 				{link.name}
 			</a>
 		{/each}
 	</div>
 </div>
+
+<style>
+	.glow-title {
+		text-shadow:
+			0 0 2px currentColor,
+			0 0 5px color-mix(in srgb, currentColor 30%, transparent);
+	}
+</style>

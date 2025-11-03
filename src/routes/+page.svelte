@@ -6,7 +6,7 @@
 	class="section grid-responsive smooth-trans-8 bg-light-background pb-[10vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
 >
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
-		<h1 class="font-bold title-font title-sizing smooth-trans-8">
+		<h1 class="title-font title-sizing smooth-trans-8 font-bold">
 			Hey! I'm <span class="text-light-primary dark:text-dark-primary">Farhan</span>
 		</h1>
 
@@ -19,32 +19,40 @@
 			<span class="text-light-primary dark:text-dark-primary"> TailwindCSS</span>.
 		</p>
 		<div class="flex items-center gap-3 sm:gap-[2vw]">
-			<a 
-				href="https://github.com/mfarhanz" 
-				class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
-				target="_blank" rel="noopener noreferrer"
+			<a
+				href="https://github.com/mfarhanz"
+				class="icon-button link-hover smooth-trans-2 hover:tilt-zoom-1 flex items-center gap-[1vw] sm:gap-[0.5vw]"
+				target="_blank"
+				rel="noopener noreferrer"
 			>
 				<Github class="icon-sizing-1" />
-				<span class="text-sizing-0 text-light-text dark:text-dark-text link-hover smooth-trans-2">GitHub</span>
+				<span class="text-sizing-0 link-hover smooth-trans-2 text-light-text dark:text-dark-text"
+					>GitHub</span
+				>
 			</a>
 
 			<div class="h-[2vh] w-px bg-light-text/30 dark:bg-dark-text/30"></div>
 
-			<a 
-				href="https://www.linkedin.com/in/mfarhanz" 
-				class="gap-[1vw] sm:gap-[0.5vw] flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
-				target="_blank" rel="noopener noreferrer"
+			<a
+				href="https://www.linkedin.com/in/mfarhanz"
+				class="icon-button link-hover smooth-trans-2 hover:tilt-zoom-1 flex items-center gap-[1vw] sm:gap-[0.5vw]"
+				target="_blank"
+				rel="noopener noreferrer"
 			>
 				<Linkedin class="icon-sizing-1" />
-				<span class="text-sizing-0 text-center text-light-text dark:text-dark-text link-hover smooth-trans-2">LinkedIn</span>
+				<span
+					class="text-sizing-0 link-hover smooth-trans-2 text-center text-light-text dark:text-dark-text"
+					>LinkedIn</span
+				>
 			</a>
 
 			<div class="h-[2vh] w-px bg-light-text/30 dark:bg-dark-text/30"></div>
 
-			<a 
-				href="mailto:mfz.bin@gmail.com" 
-				class="flex items-center icon-button link-hover smooth-trans-2 hover:tilt-zoom-1"
-				target="_blank" rel="noopener noreferrer"
+			<a
+				href="mailto:mfz.bin@gmail.com"
+				class="icon-button link-hover smooth-trans-2 hover:tilt-zoom-1 flex items-center"
+				target="_blank"
+				rel="noopener noreferrer"
 			>
 				<Mail class="icon-sizing-1" />
 			</a>
@@ -52,8 +60,34 @@
 	</div>
 </section>
 
-<section class="section pb-[8vh] gap-[4vh]">
-	<h2 class="font-medium subtitle-font subtitle-sizing-2">
-		About Me
-	</h2>
+<section class="section gap-[4vh] pb-[8vh]">
+	<h2 class="subtitle-font subtitle-sizing-2 font-medium">About Me</h2>
+
+	<div
+		class="smooth-trans-8 flex flex-col-reverse items-center justify-between gap-[5vh] md:flex-row md:items-start"
+	>
+		<div
+			class="text-sizing-2 smooth-trans-8 w-full leading-relaxed text-light-text/80 dark:text-dark-text/80 md:w-3/4"
+		>
+			<p class="mb-[2vh]">
+				I’m passionate about building beautiful, performant web experiences that combine creativity
+				with precision. My focus is on crafting thoughtful user interfaces, experimenting with
+				interactions, and pushing what’s possible on the web.
+			</p>
+			<p>
+				When I’m not coding, I enjoy learning new technologies, exploring design concepts, and
+				contributing to open-source projects. I believe great design and code go hand in hand — both
+				require curiosity, care, and iteration.
+			</p>
+		</div>
+
+		<div class="flex w-[50%] justify-center md:-mt-[4vh] md:w-[40%] md:justify-end">
+			<img
+				src="https://avatars.githubusercontent.com/u/51290906?v=4"
+				alt="Farhan"
+				style:--tag="github-avatar"
+				class="avatar smooth-trans-8 aspect-square w-[70vw] max-w-[340px] rounded-full object-cover shadow-lg"
+			/>
+		</div>
+	</div>
 </section>

@@ -24,4 +24,46 @@ html.dark .code-dark {
 	[style*='--tag'] {
 		view-transition-name: var(--tag);
 	}
+
+  [style*='--title'] {
+		view-transition-name: var(--title);
+	}
 }
+
+::view-transition-old(main),
+::view-transition-new(main) {
+	animation-duration: 0.4s;
+	animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(main) {
+	animation-name: page-blur-out;
+}
+
+::view-transition-new(main) {
+	animation-name: page-blur-in;
+}
+
+@keyframes page-blur-out {
+	from {
+		opacity: 1;
+		filter: blur(0);
+	}
+	to {
+		opacity: 0;
+		filter: blur(12px);
+	}
+}
+
+@keyframes page-blur-in {
+	from {
+		opacity: 0;
+		filter: blur(12px);
+	}
+	to {
+		opacity: 1;
+		filter: blur(0);
+	}
+}
+
+

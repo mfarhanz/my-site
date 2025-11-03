@@ -1,5 +1,3 @@
-// import { goto } from '$app/navigation';
-
 export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
@@ -42,28 +40,18 @@ export function formatDate(date: string, dateStyle: DateStyle = 'medium', locale
 }
 
 import { onNavigate } from '$app/navigation';
-export const preparePageTransition = () => {
+export const prepareViewTransition = () => {
     onNavigate((navigation) => {
-        // If the browser doesn't support View Transitions, just let the SvelteKit transition run
         if (!document.startViewTransition) return;
-        
-        const indexPath = '/projects';
-        const fromPath = navigation.from?.url.pathname ?? '';
-        const toPath = navigation.to?.url.pathname ?? '';
-        const isIndex = (path: string) => path === indexPath || path === indexPath + '/';
-        const issSlug = (path: string) => path.startsWith(indexPath + '/') && path.length > indexPath.length + 1;
-        // Check for the specific cross-fade routes:
-        const isIndexToSlug = isIndex(fromPath) && issSlug(toPath);
-        const isSlugToIndex = issSlug(fromPath) && isIndex(toPath);        
 
-        // only run the View Transition for these two routes
-        if (isIndexToSlug || isSlugToIndex) {       
-            return new Promise((resolve) => {
-                document.startViewTransition(async () => {
-                    resolve(); // Resolve the promise right before the content change
-                    await navigation.complete; // Wait for SvelteKit to update the DOM
-                });
+        if (navigation.to?.url.pathname === navigation.from?.url.pathname) return;
+
+        return new Promise((resolve) => {
+            document.startViewTransition(async () => {
+                resolve();
+                await navigation.complete;
             });
-        }
+        });
     });
 };
+
