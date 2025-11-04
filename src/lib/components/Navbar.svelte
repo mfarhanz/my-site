@@ -6,7 +6,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { derived } from 'svelte/store';
-	
+
 	let menuOpen = false;
 	const isHome = derived(page, ($page) => $page.url.pathname === '/');
 
@@ -47,7 +47,7 @@
 				<li class="flex w-full sm:w-auto">
 					<a
 						href={link.href}
-						class="nav-link button-text-font smooth-trans-3 hover-bg-slide"
+						class="nav-link button-text-font cutout-tilt smooth-trans-3"
 						class:active={$page.url.pathname === link.href}
 						on:click|preventDefault={() => goto(link.href)}
 					>
