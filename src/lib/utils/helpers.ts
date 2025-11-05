@@ -55,3 +55,24 @@ export const prepareViewTransition = () => {
     });
 };
 
+import { beforeNavigate, afterNavigate } from '$app/navigation';
+import { onDestroy } from 'svelte';
+export function setupNavigationHandler(
+	fn: typeof beforeNavigate | typeof afterNavigate,
+	check: (fromUrl?: string, toUrl?: string) => boolean,
+	setter: (val: boolean) => void
+) {
+	// capture cleanup function from the listener
+	const unsubscribe = (fn(({ from, to }) => {
+		const fromUrl = from?.url?.pathname;
+		const toUrl = to?.url?.pathname;
+		setter(check(fromUrl, toUrl));
+	}) as unknown) as (() => void) | undefined;
+
+	onDestroy(() => {
+		// remove listener on destroy
+		unsubscribe?.();
+	});
+
+	return unsubscribe;
+}

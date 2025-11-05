@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @import '$lib/styles/utilities.css';
+@import './lib/styles/transitions.css';
 
 /* Global styles */
 html {
@@ -32,38 +33,14 @@ html.dark .code-dark {
 
 ::view-transition-old(main),
 ::view-transition-new(main) {
-	animation-duration: 0.4s;
+	animation-duration: .4s;
 	animation-timing-function: ease-in-out;
 }
 
 ::view-transition-old(main) {
-	animation-name: page-blur-out;
+	animation-name: plane-out;
 }
 
 ::view-transition-new(main) {
-	animation-name: page-blur-in;
+	animation-name: plane-in;
 }
-
-@keyframes page-blur-out {
-	from {
-		opacity: 1;
-		filter: blur(0);
-	}
-	to {
-		opacity: 0;
-		filter: blur(12px);
-	}
-}
-
-@keyframes page-blur-in {
-	from {
-		opacity: 0;
-		filter: blur(12px);
-	}
-	to {
-		opacity: 1;
-		filter: blur(0);
-	}
-}
-
-

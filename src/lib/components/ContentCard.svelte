@@ -1,67 +1,80 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { ContentItem } from '$lib/types/content';
-	import { randomBetween } from '$lib/utils/helpers';
-
-	export let item: ContentItem;
-	let isHovering = false;
-	let videoEl: HTMLVideoElement;
-
+	import { randomBetween, setupNavigationHandler } from '$lib/utils/helpers';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
-	let shouldTag = false;
+	let { item }: { item: ContentItem } = $props();
+	let shouldTag = $state(false);
 
-	beforeNavigate(({ from, to }) => {
-		// when navigation transition starts when going out of projects/ or notes/
-		let fromUrl = from?.url?.pathname;
-		let toUrl = to?.url?.pathname;
-		if (
-			fromUrl === '/projects' &&
-			toUrl?.startsWith('/projects/') &&
-			toUrl.length > '/projects/'.length
-		) {
-			shouldTag = true;
-		} else {
-			shouldTag = false;
-		}
-	});
+	let isHovering = $state(false);
+	let videoEl = $state<HTMLVideoElement | null>(null);
 
-	afterNavigate(({ from, to }) => {
-		// when navigation transition ends when going into projects/ or notes/
-		let fromUrl = from?.url?.pathname;
-		let toUrl = to?.url?.pathname;
-		if (
-			fromUrl?.startsWith('/projects/') &&
-			fromUrl.length > '/projects/'.length &&
-			toUrl === '/projects'
-		) {
-			shouldTag = true;
-		} else {
-			shouldTag = false;
-		}
-	});
+	// const removeBefore = beforeNavigate(({ from, to }) => {
+	// 	// when navigation transition starts when going out of projects/ or notes/
+	// 	let fromUrl = from?.url?.pathname;
+	// 	let toUrl = to?.url?.pathname;
+	// 	if (
+	// 		fromUrl === '/projects' &&
+	// 		toUrl?.startsWith('/projects/') &&
+	// 		toUrl.length > '/projects/'.length
+	// 	) {
+	// 		shouldTag = true;
+	// 	} else {
+	// 		shouldTag = false;
+	// 	}
+	// });
+
+	// const removeAfter = afterNavigate(({ from, to }) => {
+	// 	// when navigation transition ends when going into projects/ or notes/
+	// 	let fromUrl = from?.url?.pathname;
+	// 	let toUrl = to?.url?.pathname;
+	// 	if (
+	// 		fromUrl?.startsWith('/projects/') &&
+	// 		fromUrl.length > '/projects/'.length &&
+	// 		toUrl === '/projects'
+	// 	) {
+	// 		shouldTag = true;
+	// 	} else {
+	// 		shouldTag = false;
+	// 	}
+	// });
+
+	setupNavigationHandler(
+		beforeNavigate,
+		(from, to) =>
+			!!(from === '/projects' && to?.startsWith('/projects/') && to.length > '/projects/'.length),
+		(val) => (shouldTag = val)
+	);
+
+	setupNavigationHandler(
+		afterNavigate,
+		(from, to) =>
+			!!(from?.startsWith('/projects/') && from.length > '/projects/'.length && to === '/projects'),
+		(val) => (shouldTag = val)
+	);
 
 	function openContentPage() {
 		if (!item.route) return;
 		goto(item.route!);
 	}
 
-	$: {
+	$effect(() => {
 		if (videoEl) {
 			if (isHovering) videoEl.play();
 			else videoEl.pause();
 		}
-	}
+	});
 </script>
 
 <div
 	role="button"
 	tabindex="0"
-	on:click={openContentPage}
-	on:keydown={(e) => e.key === 'Enter' && openContentPage()}
-	on:mouseenter={() => (isHovering = true)}
-	on:mouseleave={() => (isHovering = false)}
-	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full break-inside-avoid cursor-pointer flex-col gap-4 overflow-hidden 
+	onclick={openContentPage}
+	onkeydown={(e) => e.key === 'Enter' && openContentPage()}
+	onmouseenter={() => (isHovering = true)}
+	onmouseleave={() => (isHovering = false)}
+	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full cursor-pointer break-inside-avoid flex-col gap-4 overflow-hidden 
 			rounded-[3vh] bg-light-background-button p-[3vw] shadow-md backdrop-blur-md hover:scale-[1.07] active:scale-[0.98] dark:bg-dark-background-button 
 			sm:gap-[1.2vw] md:p-[2vw] lg:p-[1vw]`}
 >
