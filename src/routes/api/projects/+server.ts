@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit'
 import type { Project } from '$lib/types/project'
 import type { MarkdownModule } from '$lib/types/module'
 
-let cached: Project[] | null = null
+let cached: Project[] | null = null;
 
 async function getAllContent() {
     const paths = import.meta.glob<MarkdownModule<Omit<Project, 'slug'>>>('../../../content/projects/*.md', { eager: true })

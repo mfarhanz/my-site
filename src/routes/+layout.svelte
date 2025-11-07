@@ -2,23 +2,11 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	// import { cubicIn, cubicOut } from 'svelte/easing';
+	import { prepareViewTransition } from '$lib/utils/helpers';
 
 	let { children, data } = $props();
 	let pathname = $derived(data.pathname);
-
-	// const duration = 200;
-	// const delay = duration + 100;
-	// const opacity = 0.2;
-	// const amount = 15;
-	// const easingIn = cubicIn;
-	// const easingOut = cubicOut;
-	// const transition = {
-	// 	in: { delay: delay, duration: duration, easing: easingOut, amount: amount, opacity: opacity },
-	// 	out: { duration: duration, easing: easingIn, amount: amount, opacity: opacity }
-	// };
-
-	import { prepareViewTransition } from '$lib/utils/helpers';
+	
 	prepareViewTransition();
 </script>
 

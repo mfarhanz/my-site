@@ -1,20 +1,9 @@
 <script lang="ts">
-    import ContectSection from '$lib/components/ContentSection.svelte';
-	import { projectsStore } from '$lib/stores/projects';
-    import type { Project } from '$lib/types/project'
-
-	// let { data } = $props();
-	// const projects: ContentItem[] = data.projects.map((p) => ({
-	// 	src: p.image,
-	// 	description: p.description ?? 'No description available.',
-	// 	tags: p.tags ?? [],
-	// 	route: `/projects/${p.slug}`
-	// }));
+	import ContectSection from '$lib/components/ContentSection.svelte';
+	import type { Project } from '$lib/types/project';
 
 	export let data;
-	// initialize the store if empty or null
-	projectsStore.update((current) => (current && current.length ? current : (data.projects ?? [])));
-	$: projects = ($projectsStore ?? []).map((p: Project) => ({
+	$: projects = (data.projects ?? []).map((p: Project) => ({
 		src: p.image,
 		description: p.description ?? 'No description available.',
 		tags: p.tags ?? [],

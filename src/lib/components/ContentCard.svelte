@@ -10,36 +10,6 @@
 	let isHovering = $state(false);
 	let videoEl = $state<HTMLVideoElement | null>(null);
 
-	// const removeBefore = beforeNavigate(({ from, to }) => {
-	// 	// when navigation transition starts when going out of projects/ or notes/
-	// 	let fromUrl = from?.url?.pathname;
-	// 	let toUrl = to?.url?.pathname;
-	// 	if (
-	// 		fromUrl === '/projects' &&
-	// 		toUrl?.startsWith('/projects/') &&
-	// 		toUrl.length > '/projects/'.length
-	// 	) {
-	// 		shouldTag = true;
-	// 	} else {
-	// 		shouldTag = false;
-	// 	}
-	// });
-
-	// const removeAfter = afterNavigate(({ from, to }) => {
-	// 	// when navigation transition ends when going into projects/ or notes/
-	// 	let fromUrl = from?.url?.pathname;
-	// 	let toUrl = to?.url?.pathname;
-	// 	if (
-	// 		fromUrl?.startsWith('/projects/') &&
-	// 		fromUrl.length > '/projects/'.length &&
-	// 		toUrl === '/projects'
-	// 	) {
-	// 		shouldTag = true;
-	// 	} else {
-	// 		shouldTag = false;
-	// 	}
-	// });
-
 	setupNavigationHandler(
 		beforeNavigate,
 		(from, to) =>

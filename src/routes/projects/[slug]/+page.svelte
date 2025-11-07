@@ -7,36 +7,6 @@
 	let { data }: { data: { content: any; meta: Project; pathname: any } } = $props();
 	let shouldTag = $state(false);
 
-	// beforeNavigate(({ from, to }) => {
-	// 	// if navigating out of a /projects/[slug]
-	// 	let fromUrl = from?.url?.pathname;
-	// 	let toUrl = to?.url?.pathname;
-	// 	if (
-	// 		fromUrl?.startsWith('/projects/') &&
-	// 		fromUrl.length > '/projects/'.length &&
-	// 		toUrl === '/projects'
-	// 	) {
-	// 		shouldTag = true;
-	// 	} else {
-	// 		shouldTag = false;
-	// 	}
-	// });
-
-	// afterNavigate(({ from, to }) => {
-	// 	// if navigating into a /projects/[slug]
-	// 	let fromUrl = from?.url?.pathname;
-	// 	let toUrl = to?.url?.pathname;
-	// 	if (
-	// 		fromUrl === '/projects' &&
-	// 		toUrl?.startsWith('/projects/') &&
-	// 		toUrl.length > '/projects/'.length
-	// 	) {
-	// 		shouldTag = true;
-	// 	} else {
-	// 		shouldTag = false;
-	// 	}
-	// });
-
 	setupNavigationHandler(
 		beforeNavigate,
 		(from, to) =>
@@ -144,7 +114,9 @@
 				</div>
 			</header>
 			<div class="code-light code-dark smooth-trans-8 prose relative z-10 w-full dark:prose-invert">
-				{@render data.content()}
+				{#key data.meta.slug}
+					{@render data.content()}
+				{/key}
 			</div>
 		</div>
 	{:else}
