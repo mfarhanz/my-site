@@ -33,24 +33,12 @@
 		<div
 			class="smooth-trans-8 h-[25vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
 		>
-			{#if data.meta.image.endsWith('.webm')}
-				<video
-					src={data.meta.image}
-					muted
-					playsinline
-					loop
-					autoplay
-					style={shouldTag ? `--tag:${data.meta.slug}` : undefined}
-					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
-				></video>
-			{:else}
-				<img
+			<img
 					src={data.meta.image}
 					alt={data.meta.title}
 					style={shouldTag ? `--tag:${data.meta.slug}` : undefined}
 					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
 				/>
-			{/if}
 			<div
 				class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-light-background dark:to-dark-background"
 			></div>

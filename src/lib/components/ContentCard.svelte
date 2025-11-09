@@ -7,9 +7,6 @@
 	let { item }: { item: ContentItem } = $props();
 	let shouldTag = $state(false);
 
-	let isHovering = $state(false);
-	let videoEl = $state<HTMLVideoElement | null>(null);
-
 	setupNavigationHandler(
 		beforeNavigate,
 		(from, to) =>
@@ -28,13 +25,6 @@
 		if (!item.route) return;
 		goto(item.route!);
 	}
-
-	$effect(() => {
-		if (videoEl) {
-			if (isHovering) videoEl.play();
-			else videoEl.pause();
-		}
-	});
 </script>
 
 <div
@@ -42,8 +32,6 @@
 	tabindex="0"
 	onclick={openContentPage}
 	onkeydown={(e) => e.key === 'Enter' && openContentPage()}
-	onmouseenter={() => (isHovering = true)}
-	onmouseleave={() => (isHovering = false)}
 	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full cursor-pointer break-inside-avoid flex-col gap-4 overflow-hidden 
 			rounded-[3vh] bg-light-background-button p-[3vw] shadow-md backdrop-blur-md hover:scale-[1.07] active:scale-[0.98] dark:bg-dark-background-button 
 			sm:gap-[1.2vw] md:p-[2vw] lg:p-[1vw]`}
@@ -53,24 +41,13 @@
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
 			style={shouldTag ? `--tag:${item.route?.split('/').pop()}` : undefined}
 		>
-			{#if item.src.endsWith('.webm')}
-				<video
-					bind:this={videoEl}
-					src={item.src}
-					muted
-					playsinline
-					loop
-					class="smooth-trans-8 h-full w-full rounded-xl object-cover"
-				></video>
-			{:else}
-				<img
+			<img
 					src={item.src}
 					alt="project"
 					loading="lazy"
 					decoding="async"
 					class="smooth-trans-8 h-full w-full rounded-xl object-cover"
 				/>
-			{/if}
 		</div>
 	{/if}
 
