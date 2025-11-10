@@ -3,7 +3,6 @@ export interface Project {
 	slug: string
 	description?: string
 	date?: string
-	repo?: string
 	tags?: string[]
 	published?: boolean
 	links?: {

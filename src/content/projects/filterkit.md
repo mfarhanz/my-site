@@ -2,7 +2,6 @@
 title: "Filterkit"
 description: "Compact Python library for various image processing methods."
 date: "2025-10-19"
-repo: "https://github.com/mfarhanz/filterkit"
 tags: ["Python", "Numpy", "Numba"]
 published: true
 links:

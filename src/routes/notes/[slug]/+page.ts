@@ -1,10 +1,11 @@
 import { loadContentBySlug } from '$lib/utils/content';
-import { notesStore } from '$lib/stores/notes';
 import type { Note } from '$lib/types/note';
-import { get } from 'svelte/store';
 
-export async function load({ params }) {
-    const content = get(notesStore);
-    const note: Note | undefined = content?.find(p => p.slug === params.slug);
-    return loadContentBySlug('notes', params.slug, { image: note?.image, slug: params.slug });
+export async function load({ params, parent }) {
+    const { notes } = await parent();
+    const note: Note | undefined = (notes as Note[])?.find(p => p.slug === params.slug);
+    return loadContentBySlug('notes', params.slug, { 
+        image: note?.image, 
+        slug: params.slug 
+    });
 }

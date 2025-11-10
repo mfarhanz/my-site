@@ -33,7 +33,7 @@ html.dark .code-dark {
 
 ::view-transition-old(main),
 ::view-transition-new(main) {
-	animation-duration: .4s;
+	animation-duration: .3s;
 	animation-timing-function: ease-in-out;
 }
 

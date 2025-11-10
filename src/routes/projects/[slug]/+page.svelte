@@ -5,7 +5,7 @@
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
 	let { data }: { data: { content: any; meta: Project; pathname: any } } = $props();
-	let shouldTag = $state(false);
+	let shouldTag = $state(false);	// for separating element specific page view transitions with main page transition
 
 	setupNavigationHandler(
 		beforeNavigate,
@@ -59,7 +59,10 @@
 				class="relative mb-[4vh] w-full border-b-[0.3vh] border-light-text/10 pb-[6vh] dark:border-dark-text/20"
 			>
 				<div class="relative z-10">
-					<h1 class="pb-[2vh] font-semibold text-light-primary dark:text-dark-primary">
+					<h1 
+						style={shouldTag ? `--tag:${data.meta.slug}-title` : undefined}
+						class="pb-[2vh] font-semibold text-light-primary dark:text-dark-primary"
+					>
 						{data.meta.title}
 					</h1>
 					<p
@@ -92,6 +95,7 @@
 						<div class="flex flex-wrap gap-[1.9vw] pt-[1vh] sm:gap-[0.7vw]">
 							{#each data.meta.tags as tag}
 								<span
+									style={shouldTag ? `--tag:${data.meta.slug}-${tag}-tag` : undefined}
 									class="text-sizing-0 smooth-trans-8 rounded-full bg-light-accent/20 px-[3vw] py-1 text-light-accent dark:bg-dark-accent/20 dark:text-dark-accent sm:px-[1vw]"
 								>
 									{tag}

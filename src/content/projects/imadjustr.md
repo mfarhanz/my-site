@@ -2,7 +2,6 @@
 title: "ImAdjustr"
 description: "ImAdjustr is a lightweight tool for retouching, filtering, or altering image and GIF files."
 date: "2025-10-19"
-repo: "https://github.com/mfarhanz/imadjustr"
 tags: ["C#", "Python", "Winforms"]
 published: true
 links:

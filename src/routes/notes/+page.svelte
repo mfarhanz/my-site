@@ -1,16 +1,15 @@
 <script lang="ts">
 	import ContentCard from '$lib/components/ContentCard.svelte';
 	import ContentSection from '$lib/components/ContentSection.svelte';
-	import { notesStore } from '$lib/stores/notes';
 	import type { Note } from '$lib/types/note';
 
 	export let data;
-	notesStore.update((current) => (current && current.length ? current : (data.notes ?? [])));
-	$: notes = ($notesStore ?? []).map((p: Note) => ({
-		src: p.image,
-		description: p.description ?? 'No description available.',
-		tags: p.tags ?? [],
-		route: `/notes/${p.slug}`
+	$: notes = (data.notes ?? []).map((note: Note) => ({
+		src: note.image,
+		title: note.title,
+		description: note.description ?? '',
+		tags: note.tags ?? [],
+		route: `/notes/${note.slug}`
 	}));
 </script>
 
@@ -24,7 +23,8 @@
 		<ContentCard
 			item={{
 				src: '/misc/static_2.gif',
-				description: 'Nothing here yet...',
+				title: '404',
+				description: 'Not Found',
 				tags: ['', '', '']
 			}}
 		/>

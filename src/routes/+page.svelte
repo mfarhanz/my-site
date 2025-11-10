@@ -70,12 +70,12 @@
 			class="text-sizing-2 smooth-trans-8 w-full leading-relaxed text-light-text/80 dark:text-dark-text/80 md:w-3/4"
 		>
 			<p class="mb-[2vh]">
-				I’m passionate about building beautiful, performant web experiences that combine creativity
+				I'm passionate about building beautiful, performant web experiences that combine creativity
 				with precision. My focus is on crafting thoughtful user interfaces, experimenting with
-				interactions, and pushing what’s possible on the web.
+				interactions, and pushing what's possible on the web.
 			</p>
 			<p>
-				When I’m not coding, I enjoy learning new technologies, exploring design concepts, and
+				When I'm not coding, I enjoy learning new technologies, exploring design concepts, and
 				contributing to open-source projects. I believe great design and code go hand in hand — both
 				require curiosity, care, and iteration.
 			</p>
@@ -86,7 +86,7 @@
 				src="https://avatars.githubusercontent.com/u/51290906?v=4"
 				alt="Farhan"
 				style:--tag="github-avatar"
-				class="avatar smooth-trans-8 aspect-square w-[70vw] max-w-[340px] rounded-full object-cover shadow-lg"
+				class="avatar smooth-trans-8 aspect-square w-[40vw] sm:w-[70vw] md:w-[35vw] lg:w-[70vw] max-w-[300px] sm:max-w-[23vw] rounded-full object-cover shadow-lg"
 			/>
 		</div>
 	</div>

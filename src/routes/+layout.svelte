@@ -3,11 +3,45 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import { prepareViewTransition } from '$lib/utils/helpers';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+    import { onMount } from 'svelte';
 
 	let { children, data } = $props();
 	let pathname = $derived(data.pathname);
+	let htmlElement: HTMLElement | null = null;
 	
 	prepareViewTransition();
+
+    onMount(() => {
+        if (typeof window !== 'undefined') {
+            htmlElement = document.documentElement;
+            // ensure initial load is at the top instantly (no auto smooth scroll)
+            window.scrollTo(0, 0);
+        }
+    });
+
+    beforeNavigate(({ type }) => {
+        if (typeof window === 'undefined' || !htmlElement) return;
+        // if navigating via back/forward, temporarily disable any CSS smooth scroll
+        if (type === 'popstate') {
+            htmlElement.style.scrollBehavior = 'auto';
+        }
+    });
+
+    afterNavigate(({ type }) => {
+        if (typeof window === 'undefined' || !htmlElement) return;
+        // if we are coming from a link click, instantly scroll to the top (0,0)
+        if (type !== 'popstate') {
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'instant' 
+            });
+        }
+        // Always restore the default scroll-behavior after the transition/scroll is complete
+        // this re-enables smooth scrolling for anchor links on the page.
+        htmlElement.style.scrollBehavior = ''; // resets to default/CSS-defined value
+    });
 </script>
 
 <svelte:head>

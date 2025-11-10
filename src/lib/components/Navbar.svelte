@@ -19,6 +19,7 @@
 </script>
 
 <nav
+	style:--tag="navbar"
 	class="smooth-trans-8 sticky top-0 z-50 flex w-full items-center justify-between bg-light-background-trans px-[12vw] py-[1.5vh] backdrop-blur dark:bg-dark-background-trans md:py-[1vh] lg:py-[2.2vh]"
 >
 	<div class="flex items-center gap-3">
@@ -32,6 +33,7 @@
 
 		<a
 			href="/"
+			style:--tag="site-title"
 			class="subtitle-sizing-1 site-title-font smooth-trans-8 glow-title pr-4 font-bold text-light-primary dark:text-dark-primary"
 		>
 			Farhan Zia
@@ -101,7 +103,10 @@
 				href={link.href}
 				class="nav-link button-text-font smooth-trans-2 tilt-zoom-0 w-full text-center"
 				class:active={$page.url.pathname === link.href}
-				on:click|preventDefault={() => goto(link.href)}
+				on:click|preventDefault={() => {
+                    menuOpen = false;
+                    goto(link.href);
+                }}
 			>
 				{link.name}
 			</a>
