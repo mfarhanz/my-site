@@ -6,7 +6,7 @@ tags: ["Javascript", "HTML", "CSS"]
 published: true
 links:
   - text: "GitHub"
-    url: "https://github.com/mfarhanz/gofish"
+    url: "https://github.com/mfarhanz/go-fish"
   - text: "Live Demo"
     url: "#"
     icon: "external"

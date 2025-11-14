@@ -5,6 +5,8 @@ date: "2025-10-19"
 tags: ["Javascript", "React", "TailwindCSS"]
 published: true
 links:
+  - text: "GitHub"
+    url: "https://github.com/mfarhanz/Random-Scripts/tree/main/Sign%20Detection"
   - text: "Live Demo"
     url: "#"
     icon: "external"

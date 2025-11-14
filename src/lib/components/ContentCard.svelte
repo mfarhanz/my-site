@@ -32,11 +32,10 @@
 <div
 	role="button"
 	tabindex="0"
-	data-sveltekit-noscroll
 	onclick={openContentPage}
 	onkeydown={(e) => e.key === 'Enter' && openContentPage()}
 	class={`smooth-trans-3 mx-auto flex max-h-full max-w-full cursor-pointer break-inside-avoid flex-col overflow-hidden 
-			rounded-[3vh] bg-light-background-button p-[3vw] shadow-md backdrop-blur-md hover:scale-[1.07] active:scale-[0.98] dark:bg-dark-background-button 
+			rounded-[3vh] bg-light-background-button shadow-md backdrop-blur-md hover:scale-[1.07] active:scale-[0.98] dark:bg-dark-background-button 
 			gap-[1.5vh] sm:gap-[1.3vh] md:gap-[1.5vh] p-[4vw] md:p-[2vw] lg:p-[1vw]`}
 >
 	{#if item.src}
@@ -71,7 +70,7 @@
 		{#each item.tags as tag}
 			<span
 				style={shouldTag ? `--tag:${item.route?.split('/').pop()}-${tag}-tag` : undefined}
-				class="text-sizing-0 smooth-trans-8 rounded-full bg-light-accent/20 px-[3vw] py-1 text-light-accent dark:bg-dark-accent/20 dark:text-dark-accent sm:px-[1vw]"
+				class="text-sizing-0 smooth-trans-8 rounded-full bg-light-accent/20 py-1 sm:py-[0.2vh] md:py-[0.5vh] lg:py-[0.3vh] px-[3vw] sm:px-[1vw] md:px-[1.5vw] lg:px-[1.2vw] text-light-accent dark:bg-dark-accent/20 dark:text-dark-accent"
 			>
 				{tag}
 			</span>

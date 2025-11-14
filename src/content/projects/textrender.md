@@ -6,7 +6,7 @@ tags: ["Javascript", "React", "TailwindCSS"]
 published: true
 links:
   - text: "GitHub"
-    url: "https://github.com/mfarhanz/cool-counter"
+    url: "https://github.com/mfarhanz/Random-Scripts/tree/main/Text%20Render"
   - text: "Live Demo"
     url: "#"
     icon: "external"

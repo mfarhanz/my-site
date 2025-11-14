@@ -1,10 +1,10 @@
 <script lang="ts">
+	import { API_BASE } from '$lib/config';
+
 	let name = '';
 	let email = '';
 	let message = '';
 	let status: 'idle' | 'sending' | 'sent' | 'error' = 'idle';
-
-	const API_BASE = 'https://my-site-api.vercel.app/api'; // any API endpoints are deployed on Vercel
 
 	async function handleSubmit() {
 		status = 'sending';
@@ -90,14 +90,14 @@
 				required
 				type="text"
 				placeholder="Your Name"
-				class="text-sizing-1 input-field smooth-trans-4"
+				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<input
 				bind:value={email}
 				required
 				type="email"
 				placeholder="Your Email"
-				class="text-sizing-1 input-field smooth-trans-4"
+				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<textarea
 				bind:value={message}
@@ -105,7 +105,7 @@
 				rows="3"
 				use:autoResize
 				placeholder="Your Message"
-				class="text-sizing-1 input-field smooth-trans-4 resize-none overflow-hidden"
+				class="text-sizing-1 input-field-lg smooth-trans-4 resize-none overflow-hidden"
 			></textarea>
 			<button
 				type="submit"

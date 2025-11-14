@@ -6,7 +6,7 @@ tags: ["Javascript", "React", "TailwindCSS"]
 published: true
 links:
   - text: "GitHub"
-    url: "https://github.com/mfarhanz/cool-counter"
+    url: "https://github.com/mfarhanz/terminal-sudoku"
   - text: "Live Demo"
     url: "#"
     icon: "external"

@@ -1,25 +1,3 @@
-:root {
-    --primary: theme('colors.light.primary');
-    --secondary: theme('colors.light.secondary');
-    --scroll-thumb: theme('colors.light.scroll-thumb');
-    --scroll-track: theme('colors.light.scroll-track');
-    --scroll-hover: theme('colors.light.scroll-hover');
-    --light-glow-accent: theme('colors.light.glow-accent');
-    --highlight-background: theme('colors.light.highlighted');
-    --highlight-foreground: theme('colors.light.text-highlighted');
-}
-
-.dark {
-    --primary: theme('colors.dark.primary');
-    --secondary: theme('colors.dark.secondary');
-    --scroll-thumb: theme('colors.dark.scroll-thumb');
-    --scroll-track: theme('colors.dark.scroll-track');
-    --scroll-hover: theme('colors.dark.scroll-hover');
-    --dark-glow-accent: theme('colors.dark.glow-accent');
-    --highlight-background: theme('colors.dark.highlighted');
-    --highlight-foreground: theme('colors.dark.text-highlighted');
-}
-
 ::selection {
   background: var(--highlight-background);
   color: var(--highlight-foreground);
@@ -180,14 +158,22 @@
 }
 
 .nav-link {
-    @apply relative rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs dark:border border-light-secondary dark:border-dark-secondary text-shadow-[0_0_20px_var(--light-glow-accent),0_0_20px_var(--light-glow-accent)] dark:text-shadow-[0_0_25px_var(--dark-glow-accent),0_0_25px_var(--dark-glow-accent)];
+    @apply relative rounded-[3vw] sm:rounded-[1vw] px-5 sm:px-[1.3vw] py-2 sm:py-[0.5vw] font-medium backdrop-blur-xs dark:border-[0.1vw] dark:border-dark-secondary text-shadow-[0_0_20px_var(--light-glow-accent),0_0_20px_var(--light-glow-accent)] dark:text-shadow-[0_0_25px_var(--dark-glow-accent),0_0_25px_var(--dark-glow-accent)];
 }
 
 .nav-link.active {
     @apply text-light-accent dark:text-dark-accent text-shadow-[0_0_5px_var(--light-glow-accent),0_0_5px_var(--light-glow-accent)] dark:text-shadow-[0_0_5px_var(--dark-glow-accent),0_0_5px_var(--dark-glow-accent)];
 }
 
-.input-field {
+.toggle-group-item {
+    @apply px-4 sm:px-[2vw] md:px-[1.6vw] lg:px-[1.2vw] h-[4vh] sm:h-[3vh] md:h-[2.3vh] lg:h-[2.6vw] cursor-pointer border-dark-secondary data-[state=off]:text-light-text data-[state=off]:dark:text-dark-text data-[state=off]:hover:bg-transparent data-[state=on]:bg-light-background-button data-[state=on]:dark:bg-dark-highlighted;
+}
+
+.input-field-sm {
+    @apply px-[3vw] sm:px-[1vw] md:px-[2vw] lg:px-[1vw] py-[0.7vh] rounded-[2vh] bg-light-background-trans dark:bg-dark-background-trans text-light-text dark:text-dark-text focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
+}
+
+.input-field-lg {
     @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
 }
 

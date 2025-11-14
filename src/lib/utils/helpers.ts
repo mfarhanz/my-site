@@ -2,6 +2,19 @@ export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
+export function addStringToSet(set: string[], value: string) {
+    const val = value.trim();
+    if (val && !set.map((t) => t.toLowerCase()).includes(val.toLowerCase())) {
+        set.push(val);
+    }
+}
+
+export function removeStringFromSet(set: string[], value: string) {
+    const idx = set.findIndex((s) => s.toLowerCase() === value.toLowerCase());
+    if (idx !== -1) set.splice(idx, 1);
+}
+
+
 export function mergeObjects<T extends object>(merged: T, ...rest: unknown[]): T {
     for (const obj of rest) {
         if (obj && typeof obj === 'object') {
@@ -58,21 +71,89 @@ export const prepareViewTransition = () => {
 import { beforeNavigate, afterNavigate } from '$app/navigation';
 import { onDestroy } from 'svelte';
 export function setupNavigationHandler(
-	fn: typeof beforeNavigate | typeof afterNavigate,
-	check: (fromUrl?: string, toUrl?: string) => boolean,
-	setter: (val: boolean) => void
+    fn: typeof beforeNavigate | typeof afterNavigate,
+    check: (fromUrl?: string, toUrl?: string) => boolean,
+    setter: (val: boolean) => void
 ) {
-	// capture cleanup function from the listener
-	const unsubscribe = (fn(({ from, to }) => {
-		const fromUrl = from?.url?.pathname;
-		const toUrl = to?.url?.pathname;
-		setter(check(fromUrl, toUrl));
-	}) as unknown) as (() => void) | undefined;
+    // capture cleanup function from the listener
+    const unsubscribe = (fn(({ from, to }) => {
+        const fromUrl = from?.url?.pathname;
+        const toUrl = to?.url?.pathname;
+        setter(check(fromUrl, toUrl));
+    }) as unknown) as (() => void) | undefined;
 
-	onDestroy(() => {
-		// remove listener on destroy
-		unsubscribe?.();
-	});
+    onDestroy(() => {
+        // remove listener on destroy
+        unsubscribe?.();
+    });
 
-	return unsubscribe;
+    return unsubscribe;
+}
+
+import type { Project } from '$lib/types/project';
+import { API_BASE } from '$lib/config';
+export async function getLastUpdatedTimesForProjects(projects: Project[]) {
+    const entries = await Promise.all(
+        projects.map(async (proj) => {
+            // default creation date if no GitHub link found
+            let created_at: string | undefined = '1970-01-01T00:00:00Z';
+            // find the link object with text === 'Github'
+            const repoLink = proj.links?.find((link) => link.text.toLowerCase() === 'github');
+            if (repoLink?.url) {
+                const match = repoLink.url.match(/github\.com\/[^/]+\/([^/]+)/i);
+                const repoName = match ? match[1] : null;
+                if (repoName) {
+                    try {
+                        const controller = new AbortController();
+                        const timeout = setTimeout(() => controller.abort(), 10000);
+                        const res = await fetch(`${API_BASE}/github/repo?name=${repoName}`, {
+                            signal: controller.signal
+                        });
+
+                        clearTimeout(timeout);
+
+                        if (res.ok) {
+                            const data = await res.json();
+                            created_at = data.created_at ?? created_at;
+                        } else {
+                            console.error(`Failed for ${proj.title}:`, res.status, res.statusText);
+                        }
+                    } catch (err) {
+                        console.error(`Error fetching ${proj.title}:`, err);
+                    }
+                }
+            }
+
+            return { slug: proj.slug, created_at };
+        })
+    );
+
+    return entries;
+}
+
+export function filterObjectsByTags<T extends { tags: string[] }>(
+    items: T[],
+    tags: string[]
+) {
+    if (tags.length === 0) return items;
+    return items.filter(item =>
+        tags.every(tag => item.tags.includes(tag))
+    );
+}
+
+export function mapObjectToBlockObject<T>(
+	items: T[],
+	src: keyof T,
+	title: keyof T,
+	description: keyof T,
+	tags: keyof T,
+	route: (item: T) => string
+) {
+	return items.map(item => ({
+		src: item[src] as string,
+		title: item[title] as string,
+		description: item[description] as string ?? '',
+		tags: item[tags] as string[] ?? [],
+		route: route(item)
+	}));
 }
