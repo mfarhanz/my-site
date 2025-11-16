@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { API_BASE } from '$lib/config';
 
+	export let data;
 	let name = '';
 	let email = '';
 	let message = '';
-	let status: 'idle' | 'sending' | 'sent' | 'error' = 'idle';
+	let status: 'idle' | 'sending' | 'sent' | 'error' | 'botted' = 'idle';
 
 	async function handleSubmit() {
 		status = 'sending';
@@ -12,11 +13,13 @@
 			const controller = new AbortController();
 			const timeout = setTimeout(() => controller.abort(), 10000);
 
+			const hp_val = (document.getElementById("mysitehp") as HTMLInputElement)?.value ?? "";
+
 			const res = await fetch(`${API_BASE}/contact`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ name, email, message }),
-				signal: controller.signal
+				body: JSON.stringify({ name, email, message, hp:hp_val, nonce:data.nonce }),
+				signal: controller.signal,
 			});
 
 			clearTimeout(timeout);
@@ -26,11 +29,14 @@
 				name = '';
 				email = '';
 				message = '';
+			} else if (res.status === 418) {
+				status = 'botted';
 			} else {
 				const data = await res.json().catch(() => ({}));
 				console.error('Server responded with error:', data);
 				status = 'error';
 			}
+			console.log(res)
 		} catch (err) {
 			if (err instanceof Error) {
 				if (err.name === 'AbortError') {
@@ -46,6 +52,7 @@
 	}
 
 	async function handleFakeSubmit() {
+		// just for testing
 		status = 'sending';
 		// fake delay to simulate API call
 		const randomDelay = Math.floor(Math.random() * (8500 - 1000 + 1)) + 1000;
@@ -107,6 +114,19 @@
 				placeholder="Your Message"
 				class="text-sizing-1 input-field-lg smooth-trans-4 resize-none overflow-hidden"
 			></textarea>
+			<!-- HP START -->
+			 <div class="sr-only">
+				<label for="mysitehp">This field should not be filled</label>
+				<input
+					id="mysitehp"
+					name="mysitehp"
+					type="text"
+					tabindex="-1"
+					autocomplete="off"
+					class="text-sizing-1 input-field-lg"
+				/>
+			</div>
+			<!-- HP END -->
 			<button
 				type="submit"
 				class="standard-button button-text-sizing hover:scale-[1.04] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40"
@@ -116,7 +136,10 @@
 					<span class="inline-flex items-center gap-[0.5vw]">
 						<span class="loading-dots">
 							{#each Array(14) as _, i}
-								<span class= "text-light-accent dark:text-dark-accent" style="animation-delay: {i * 0.2}s">▌</span>
+								<span
+									class="text-light-accent dark:text-dark-accent"
+									style="animation-delay: {i * 0.2}s">▌</span
+								>
 							{/each}
 						</span>
 					</span>
@@ -124,6 +147,8 @@
 					<span class="text-green-800 dark:text-green-600">🗸 Sent!</span>
 				{:else if status === 'error'}
 					<span class="text-red-900">✗ Failed</span>
+				{:else if status === 'botted'}
+					<span class="text-red-900">⚠ Bot Detected</span>
 				{:else}
 					Send Message
 				{/if}
@@ -136,11 +161,18 @@
 	.loading-dots {
 		display: inline-flex;
 	}
+
 	.loading-dots span {
 		animation: blink 3.5s linear infinite both;
 	}
+
 	@keyframes blink {
-		0%, 100% { opacity: 0; }
-		40% { opacity: 1; }
+		0%,
+		100% {
+			opacity: 0;
+		}
+		40% {
+			opacity: 1;
+		}
 	}
 </style>

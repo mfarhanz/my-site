@@ -20,13 +20,13 @@
 
 <nav
 	style:--tag="navbar"
-	class="smooth-trans-8 sticky top-0 z-50 flex w-full items-center justify-between bg-light-background-trans px-[12vw] py-[1.5vh] backdrop-blur dark:bg-dark-background-trans md:py-[1vh] lg:py-[2.2vh]"
+	class="sticky top-0 z-50 flex w-full px-[12vw] py-[1.5vh] md:py-[1vh] lg:py-[2.2vh] items-center justify-between backdrop-blur bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8"
 >
-	<div class="flex items-center gap-3">
+	<div class="flex items-center gap-[1vw]">
 		<img
 			src="https://avatars.githubusercontent.com/u/51290906?v=4"
 			alt="Farhan"
-			class="smooth-trans-8 h-[36px] w-[36px] rounded-full object-cover shadow-md md:h-[42px] md:w-[42px]"
+			class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
 			style:--tag="github-avatar"
 			class:hidden={$isHome}
 		/>

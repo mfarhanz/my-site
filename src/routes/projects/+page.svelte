@@ -3,6 +3,8 @@
 </script>
 
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import * as ToggleGroup from '$lib/components/ui/toggle-group';
 	import ContentCard from '$lib/components/ContentCard.svelte';
 	import ContentSection from '$lib/components/ContentSection.svelte';
 	import type { Project } from '$lib/types/project';
@@ -13,8 +15,6 @@
 		filterObjectsByTags,
 		mapObjectToBlockObject
 	} from '$lib/utils/helpers';
-	import * as ToggleGroup from '$lib/components/ui/toggle-group';
-	import { onMount } from 'svelte';
 
 	export let data;
 	let selectedFilter: string | undefined;

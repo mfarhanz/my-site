@@ -84,7 +84,8 @@
 		<div class="flex w-[50%] justify-center md:-mt-[4vh] md:w-[40%] md:justify-end">
 			<img
 				src="https://avatars.githubusercontent.com/u/51290906?v=4"
-				alt="Farhan"
+				alt="My Github avatar"
+				title="My Github avatar"
 				style:--tag="github-avatar"
 				class="avatar smooth-trans-8 aspect-square w-[40vw] sm:w-[70vw] md:w-[35vw] lg:w-[70vw] max-w-[300px] sm:max-w-[23vw] rounded-full object-cover shadow-lg"
 			/>
