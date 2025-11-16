@@ -174,7 +174,11 @@
 }
 
 .input-field-lg {
-    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
+    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md dark:shadow-none backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-light-accent/70 dark:focus:ring-dark-accent/70;
+}
+
+.snackbar {
+    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md dark:shadow-none
 }
 
 .cutout-tilt {

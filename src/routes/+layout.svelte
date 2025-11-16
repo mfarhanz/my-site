@@ -2,6 +2,7 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+    import { Toaster } from "$lib/components/ui/sonner";
 	import { prepareViewTransition } from '$lib/utils/helpers';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
     import { onMount } from 'svelte';
@@ -52,6 +53,12 @@
 	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text"
 >
 	<Navbar />
+    <Toaster
+        toastOptions={{
+            unstyled: true,
+            class: "snackbar text-sizing-0 subtitle-font smooth-trans-3"
+          }}
+    />
 	{#key pathname}
 		<main style="view-transition-name: main" class="smooth-trans-8 min-h-screen">
 			{@render children?.()}

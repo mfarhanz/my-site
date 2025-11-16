@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { toast } from 'svelte-sonner';
 	import { API_BASE } from '$lib/config';
 
 	export let data;
 	let name = '';
 	let email = '';
 	let message = '';
-	let status: 'idle' | 'sending' | 'sent' | 'error' | 'botted' = 'idle';
+	let status: 'idle' | 'sending' | 'sent' | 'error' = 'idle';
 
 	async function handleSubmit() {
 		status = 'sending';
@@ -13,13 +14,13 @@
 			const controller = new AbortController();
 			const timeout = setTimeout(() => controller.abort(), 10000);
 
-			const hp_val = (document.getElementById("mysitehp") as HTMLInputElement)?.value ?? "";
+			const hp_val = (document.getElementById('mysitehp') as HTMLInputElement)?.value ?? '';
 
 			const res = await fetch(`${API_BASE}/contact`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ name, email, message, hp:hp_val, nonce:data.nonce }),
-				signal: controller.signal,
+				body: JSON.stringify({ name, email, message, hp: hp_val, nonce: data.nonce }),
+				signal: controller.signal
 			});
 
 			clearTimeout(timeout);
@@ -29,23 +30,25 @@
 				name = '';
 				email = '';
 				message = '';
-			} else if (res.status === 418) {
-				status = 'botted';
+				toast('Message sent!', {
+					duration: Infinity,
+					class:
+						'bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg shadow-lg flex justify-between items-center'
+				});
 			} else {
 				const data = await res.json().catch(() => ({}));
-				console.error('Server responded with error:', data);
+				toast(data.error);
 				status = 'error';
 			}
-			console.log(res)
 		} catch (err) {
 			if (err instanceof Error) {
 				if (err.name === 'AbortError') {
-					console.error('Request timed out');
+					toast('Request timed out, try again later');
 				} else {
-					console.error('Network error:', err);
+					toast(`Internal server error: ${err.message}`);
 				}
 			} else {
-				console.error('Unknown error', err);
+				toast('Something went wrong');
 			}
 			status = 'error';
 		}
@@ -59,6 +62,7 @@
 		await new Promise((resolve) => setTimeout(resolve, randomDelay));
 		// simulate success (or swap to 'error' to test failure)
 		status = 'sent';
+		toast('Sent successfully');
 	}
 
 	function autoResize(node: HTMLTextAreaElement) {
@@ -89,33 +93,30 @@
 		</p>
 
 		<form
-			on:submit|preventDefault={handleSubmit}
+			on:submit|preventDefault={handleFakeSubmit}
 			class="mt-[4vh] flex w-full max-w-[70vw] flex-col gap-[2vh] sm:gap-[2vh] md:max-w-[55vw] md:gap-[1.8vh] lg:gap-[2vh]"
 		>
 			<input
 				bind:value={name}
-				required
 				type="text"
 				placeholder="Your Name"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<input
 				bind:value={email}
-				required
 				type="email"
 				placeholder="Your Email"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<textarea
 				bind:value={message}
-				required
 				rows="3"
 				use:autoResize
 				placeholder="Your Message"
 				class="text-sizing-1 input-field-lg smooth-trans-4 resize-none overflow-hidden"
 			></textarea>
 			<!-- HP START -->
-			 <div class="sr-only">
+			<div class="sr-only">
 				<label for="mysitehp">This field should not be filled</label>
 				<input
 					id="mysitehp"
@@ -133,22 +134,11 @@
 				disabled={status === 'sending'}
 			>
 				{#if status === 'sending'}
-					<span class="inline-flex items-center gap-[0.5vw]">
-						<span class="loading-dots">
-							{#each Array(14) as _, i}
-								<span
-									class="text-light-accent dark:text-dark-accent"
-									style="animation-delay: {i * 0.2}s">▌</span
-								>
-							{/each}
-						</span>
-					</span>
+					<span class="overflow-clip text-light-text dark:text-dark-text loader">✉ ======== ⧖</span>
 				{:else if status === 'sent'}
-					<span class="text-green-800 dark:text-green-600">🗸 Sent!</span>
+					<span class="text-green-800 dark:text-green-600">✉ ======== ✔</span>
 				{:else if status === 'error'}
-					<span class="text-red-900">✗ Failed</span>
-				{:else if status === 'botted'}
-					<span class="text-red-900">⚠ Bot Detected</span>
+					<span class="text-red-900">✉ ======== ✘</span> 
 				{:else}
 					Send Message
 				{/if}
@@ -158,21 +148,15 @@
 </section>
 
 <style>
-	.loading-dots {
-		display: inline-flex;
+	.loader {
+		font-weight: bold;
+		font-family: monospace;
+		clip-path: inset(0 11ch 0 0);
+		animation: l4 1s steps(9) infinite;
 	}
-
-	.loading-dots span {
-		animation: blink 3.5s linear infinite both;
-	}
-
-	@keyframes blink {
-		0%,
-		100% {
-			opacity: 0;
-		}
-		40% {
-			opacity: 1;
+	@keyframes l4 {
+		to {
+			clip-path: inset(0 -4ch 0 0);
 		}
 	}
 </style>
