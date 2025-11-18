@@ -3,7 +3,7 @@
 </script>
 
 <section
-	class="section grid-responsive smooth-trans-8 bg-light-background pb-[10vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
+	class="section grid-responsive pb-[10vh] pt-[9vh] smooth-trans-8"
 >
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
 		<h1 class="title-font title-sizing smooth-trans-8 font-bold">
@@ -60,7 +60,7 @@
 	</div>
 </section>
 
-<section class="section gap-[4vh] pb-[8vh]">
+<section class="section gap-[4vh] pb-[8vh] smooth-trans-8">
 	<h2 class="subtitle-font subtitle-sizing-2 font-medium">About Me</h2>
 
 	<div

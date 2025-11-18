@@ -2,7 +2,9 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
+    import FloatingWords from '$lib/components/FloatingWords.svelte';
     import { Toaster } from "$lib/components/ui/sonner";
+    import { backgroundEffectEnabled } from '$lib/stores/background-effect';
 	import { prepareViewTransition } from '$lib/utils/helpers';
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
     import { onMount } from 'svelte';
@@ -49,9 +51,13 @@
 	<link rel="icon" href="/favicon.svg" />
 </svelte:head>
 
+
 <div
-	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip bg-light-background text-light-text dark:bg-dark-background dark:text-dark-text"
+	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip text-light-text bg-light-background dark:bg-dark-background dark:text-dark-text"
 >
+    {#if $backgroundEffectEnabled}
+        <FloatingWords />
+    {/if}
 	<Navbar />
     <Toaster
         toastOptions={{

@@ -2,7 +2,7 @@
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
 </script>
 
-<footer class="w-full grid grid-cols-[1fr_auto_1fr] items-center py-[2vh] alt-text-sizing text-light-text-muted dark:text-dark-text-muted bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8">
+<footer class="w-full grid grid-cols-[1fr_auto_1fr] items-center py-[2vh] z-5 alt-text-sizing backdrop-blur-sm text-light-text-muted dark:text-dark-text-muted bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8">
 	<div></div>
 	<p class="text-center">© {new Date().getFullYear()} Farhan Zia</p>
 	<div class="flex justify-end px-[12vw]">

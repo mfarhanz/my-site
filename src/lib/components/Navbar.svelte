@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { clickOutside } from '$lib/utils/helpers';
+	import { backgroundEffectEnabled } from '$lib/stores/background-effect';
 	import { darkMode } from '$lib/stores/theme';
 	import { toggleTheme } from '$lib/utils/theme-toggle';
-	import { Sun, Moon, Menu, X } from 'lucide-svelte';
+	import { Sun, Moon, Menu, X, Monitor, MonitorPlay } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { derived } from 'svelte/store';
@@ -16,6 +17,10 @@
 		{ name: 'Notes', href: '/notes' },
 		{ name: 'Contact', href: '/contact' }
 	];
+
+	function toggleBackgroundEffect() {
+        backgroundEffectEnabled.update(v => !v);
+    }
 </script>
 
 <nav
@@ -59,8 +64,20 @@
 			{/each}
 		</ul>
 
-		<!-- Buttons (theme + menu) -->
-		<div class="flex items-center gap-3">
+		<!-- Buttons (theme + effects + menu) -->
+		<div class="flex items-center gap-3 text-light-text dark:text-dark-text">
+			<button
+				on:click={toggleBackgroundEffect}
+				class="hidden sm:inline-flex smooth-trans-2 hover:tilt-zoom-1 p-2"
+				aria-label="Toggle background effect"
+			>
+				{#if $backgroundEffectEnabled}
+					<MonitorPlay class="icon-sizing-2" />
+				{:else}
+					<Monitor class="icon-sizing-2" />
+				{/if}
+			</button>
+
 			<button
 				on:click={toggleTheme}
 				class="smooth-trans-2 hover:tilt-zoom-1 p-2"
@@ -75,7 +92,7 @@
 
 			<button
 				id="menu-toggle"
-				class="icon-button smooth-trans-2 rounded-md sm:hidden"
+				class="smooth-trans-2 icon-button rounded-md sm:hidden"
 				on:click={() => (menuOpen = !menuOpen)}
 				aria-label="Toggle navigation menu"
 			>
@@ -93,7 +110,7 @@
 <div
 	use:clickOutside
 	on:click_outside={() => (menuOpen = false)}
-	class={`smooth-trans-3 fixed right-0 top-0 z-40 flex h-full bg-light-drawer backdrop-blur-sm dark:bg-dark-drawer sm:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+	class={`sm:hidden smooth-trans-3 fixed right-0 top-0 z-40 flex h-full bg-light-drawer backdrop-blur-sm dark:bg-dark-drawer ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
 >
 	<div
 		class="button-text-sizing mt-20 flex flex-col items-end gap-4 p-8 text-light-text dark:text-dark-text"
@@ -111,6 +128,15 @@
 				{link.name}
 			</a>
 		{/each}
+		
+		<!-- Divider -->
+		<div class="w-full my-3 h-[0.2vh] bg-light-highlighted dark:bg-dark-highlighted tilt-zoom-0 smooth-trans-2"></div>
+
+		<button
+			on:click={toggleBackgroundEffect}
+			class="nav-link button-text-font smooth-trans-2 tilt-zoom-0 w-full text-center"
+			class:active={$backgroundEffectEnabled}
+		>Effects</button>
 	</div>
 </div>
 

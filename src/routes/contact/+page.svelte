@@ -14,7 +14,7 @@
 			const controller = new AbortController();
 			const timeout = setTimeout(() => controller.abort(), 10000);
 
-			const hp_val = (document.getElementById('mysitehp') as HTMLInputElement)?.value ?? '';
+			const hp_val = (document.getElementById('website') as HTMLInputElement)?.value ?? '';
 
 			const res = await fetch(`${API_BASE}/contact`, {
 				method: 'POST',
@@ -81,7 +81,7 @@
 </script>
 
 <section
-	class="section grid-responsive smooth-trans-8 bg-light-background pb-[10vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
+	class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]"
 >
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
 		<h1 class="title-font title-sizing smooth-trans-8 font-bold">Get in Touch</h1>
@@ -93,23 +93,26 @@
 		</p>
 
 		<form
-			on:submit|preventDefault={handleFakeSubmit}
+			on:submit|preventDefault={handleSubmit}
 			class="mt-[4vh] flex w-full max-w-[70vw] flex-col gap-[2vh] sm:gap-[2vh] md:max-w-[55vw] md:gap-[1.8vh] lg:gap-[2vh]"
 		>
 			<input
 				bind:value={name}
+				required
 				type="text"
 				placeholder="Your Name"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<input
 				bind:value={email}
+				required
 				type="email"
 				placeholder="Your Email"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<textarea
 				bind:value={message}
+				required
 				rows="3"
 				use:autoResize
 				placeholder="Your Message"
@@ -117,10 +120,10 @@
 			></textarea>
 			<!-- HP START -->
 			<div class="sr-only">
-				<label for="mysitehp">This field should not be filled</label>
+				<label for="website">This field should not be filled</label>
 				<input
-					id="mysitehp"
-					name="mysitehp"
+					id="website"
+					name="website"
 					type="text"
 					tabindex="-1"
 					autocomplete="off"

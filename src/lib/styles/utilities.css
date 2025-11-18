@@ -138,7 +138,7 @@
 }
 
 .section {
-    @apply flex flex-col px-[12vw];
+    @apply flex flex-col px-[12vw] bg-light-background/80 dark:bg-dark-background/80 text-light-text dark:text-dark-text;
 }
 
 .grid-responsive {
@@ -178,11 +178,11 @@
 }
 
 .snackbar {
-    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md dark:shadow-none
+    @apply px-[4.5vw] sm:px-[2vw] md:px-[3vw] lg:px-[1.5vw] py-[1.4vh] rounded-[3vh] bg-light-background-button dark:bg-dark-background-button text-light-text dark:text-dark-text shadow-md dark:shadow-none;
 }
 
 .cutout-tilt {
-    @apply transform-3d perspective-distant
+    @apply transform-3d perspective-distant;
 }
 
 .cutout-tilt:hover {
