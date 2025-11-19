@@ -43,7 +43,6 @@ export function getWordSprite(word: string, fontSize: number): WordSprite | null
     const key = `${word}_${fontSize}`;
     if (spriteCache.has(key)) return spriteCache.get(key)!;
 
-    console.log("created sprite");
     const c = ctx!;
     c.font = `${fontSize}px 'Fira Code', monospace`;
     const m = c.measureText(word);
@@ -63,10 +62,10 @@ export function getWordSprite(word: string, fontSize: number): WordSprite | null
     return sprite;
 }
 
-export function clearSpriteCache() {
-    spriteCache.clear();
-    if (ctx) ctx.clearRect(0, 0, ATLAS_SIZE, ATLAS_SIZE);
-    penX = 0;
-    penY = 0;
-    lineH = 0;
-}
+// export function clearSpriteCache() {
+//     spriteCache.clear();
+//     if (ctx) ctx.clearRect(0, 0, ATLAS_SIZE, ATLAS_SIZE);
+//     penX = 0;
+//     penY = 0;
+//     lineH = 0;
+// }

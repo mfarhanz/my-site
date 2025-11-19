@@ -55,9 +55,7 @@
 <div
 	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip text-light-text bg-light-background dark:bg-dark-background dark:text-dark-text"
 >
-    {#if $backgroundEffectEnabled}
-        <FloatingWords />
-    {/if}
+    <FloatingWords enabled={$backgroundEffectEnabled} />
 	<Navbar />
     <Toaster
         toastOptions={{
