@@ -1,30 +1,31 @@
 ---
 title: "CoolCounter"
-date: "2025-10-19"
+description: "Simplistic counter webapp"
+date: "2025-10-4"
 tags: ["Javascript", "React", "TailwindCSS"]
 published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/cool-counter"
   - text: "Live Site"
-    url: "#"
-    icon: "external"
-  - text: "Live Site"
-    url: "#"
+    url: "https://cooolcounter.vercel.app/"
     icon: "external"
 ---
 
-# About the Project
+# About
 
-This is a sample project content written in Markdown/MDsveX.  
-You can write static paragraphs, headings, lists, code blocks, images, etc.
+CoolCounter is a simple and lightweight web application that lets you increment, decrement, and reset a counter. While it doesn't serve a complex real-world purpose, it was built as a fast, hands-on project to get familiar with **React** and **TailwindCSS**.
+
+The main goal was to explore the framework and styling workflow while building something minimal, interactive, and visually customizable.
 
 ## Features
 
-- Feature 1: describe it briefly
-- Feature 2: describe it briefly
-- Feature 3: etc.
+- Increment, decrement, and reset the counter
+- Customize the counter’s foreground color, background color, and font
+- Fast and responsive UI built with TailwindCSS
+- Designed as a simple playground to practice React patterns and component structure
 
 ## Notes
 
-Optional notes about the project, references, screenshots, or demos.
+- Starter project for experimenting with frontend frameworks
+- Demonstrates clean state management and simple UI interactivity

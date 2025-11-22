@@ -131,14 +131,14 @@ export async function getLastUpdatedTimesForProjects(projects: Project[]) {
     return entries;
 }
 
-export function filterObjectsByTags<T extends { tags: string[] }>(
-    items: T[],
-    tags: string[]
-) {
+export function filterObjectsByTags<T extends { tags: string[] }>(items: T[], tags: string[]) {
     if (tags.length === 0) return items;
-    return items.filter(item =>
-        tags.every(tag => item.tags.includes(tag))
-    );
+     // make both the 'tags' and item.tags lowercase before filtering
+    const lowerTags = tags.map(tag => tag.toLowerCase());
+    return items.filter(item => {
+        const itemTagsLower = item.tags.map(tag => tag.toLowerCase());
+        return lowerTags.every(tag => itemTagsLower.includes(tag));
+    });
 }
 
 export function mapObjectToBlockObject<T>(

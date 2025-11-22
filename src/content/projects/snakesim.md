@@ -1,28 +1,39 @@
 ---
-title: "CoolCounter"
-description: "Just another counter webapp."
-date: "2025-10-19"
-tags: ["Javascript", "React", "TailwindCSS"]
+title: "SnakeSim"
+description: "Simulating pathfinding via Snake"
+date: "2024-02-25"
+tags: ["Python", "Tkinter", "Pathfinding"]
 published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/SnakeSim"
-  - text: "Live Demo"
-    url: "#"
-    icon: "external"
 ---
 
-# About the Project
-
-This is a sample project content written in Markdown/MDsveX.  
-You can write static paragraphs, headings, lists, code blocks, images, etc.
+**SnakeSim** is a Python application built with Tkinter that visualizes classic pathfinding algorithms through the mechanics of the Snake game. Instead of moving a simple point across a grid, the algorithms operate inside a full Snake environment, complete with obstacles, movement rules, and dynamic states.
 
 ## Features
 
-- Feature 1: describe it briefly
-- Feature 2: describe it briefly
-- Feature 3: etc.
+- **Pathfinding Simulation**  
+  Run algorithms like A*, BFS, DFS, Dijkstra, and others inside a Snake-style grid.
 
-## Notes
+- **Maze Generation**  
+  Generate mazes using different algorithms, with walls acting as obstacles the snake cannot pass through.
 
-Optional notes about the project, references, screenshots, or demos.
+- **Step-by-Step Visualization**  
+  Watch every stage of the process, from maze construction to each move made by the snake during pathfinding.
+
+- **Simulation Controls**  
+  Step through the simulation one frame at a time, pause it, or let it run automatically.
+
+- **Editable Grid**  
+  Draw or erase walls, reposition elements, and customize the layout however you like.
+
+- **Gameplay Modes**  
+  Play traditional Snake (you chase the food) or switch to the inverted mode where *you* are the target and the snake hunts you.
+
+- **Quality-of-Life Tools**  
+  Extra controls to tweak behavior, maze patterns, and simulation speed.
+
+## Purpose
+
+SnakeSim was built as an intuitive learning tool to better understand fundamental pathfinding algorithms. By embedding them into a Snake environment, their differences become clearer, more dynamic, and more interesting to observe.

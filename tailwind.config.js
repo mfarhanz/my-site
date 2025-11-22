@@ -49,6 +49,8 @@ export default {
             typography: ({ theme }) => ({
                 DEFAULT: {
                     css: {
+                        "code::before": { content: '""' },  // remove backticks from parsed <code> elements
+						"code::after": { content: '""' },
                         color: theme('colors.light.text'),
                         lineHeight: 1.8,
                         maxWidth: '100%',
@@ -85,24 +87,19 @@ export default {
                         color: theme('colors.dark.text'),
                         a: {
                             color: theme('colors.dark.accent'),
-                            textDecoration: 'none',
-                            '&:hover': { color: theme('colors.dark.highlighted') }
+                            '&:hover': { color: theme('colors.dark.text-highlighted') }
                         },
                         h1: {
                             color: theme('colors.dark.primary'),
-                            fontWeight: '400',
                         },
                         h2: {
                             color: theme('colors.dark.primary'),
-                            fontWeight: '400',
                         },
                         h3: {
                             color: theme('colors.dark.primary'),
-                            fontWeight: '400',
                         },
                         strong: {
                             color: theme('colors.dark.text'),
-                            fontWeight: '750',
                         },
                     }
                 }

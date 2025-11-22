@@ -1,182 +1,46 @@
 ---
 title: "Go Fish"
-description: "Play Go Fish, a classic playing cards game, in the browser!"
-date: "2025-10-19"
+description: "Classic playing cards game"
+date: "2024-12-20"
 tags: ["Javascript", "HTML", "CSS"]
 published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/go-fish"
-  - text: "Live Demo"
-    url: "#"
+  - text: "Live Site"
+    url: "https://mfarhanz.github.io/go-fish"
     icon: "external"
 ---
 
-## The Pain Point
+# About
 
-Ever clicked "stop" on an AI chat and watched your browser hang for 30 seconds? That's what happens when streaming AI endpoints aren't wired for cancellation. The server keeps burning CPU on inference nobody wants while real users get slower responses.
+Go Fish is a browser-based implementation of the classic card game, built entirely with vanilla JavaScript, HTML and CSS. It was a fun little project inspired by my younger siblings, who had recently gotten really into the game — we played it nonstop while I was visiting home, so I figured I’d try building a digital version before leaving again.
 
-In [Agno](https://github.com/agno-agi/agno), we solved this by implementing graceful cancellation across HTTP, WebSocket, and stateful Redis patterns. Here's how each approach works and when to use them.
+## Overview
 
-*This implementation stems from [agno#3106](https://github.com/agno-agi/agno/issues/3106#issuecomment-3212047469) where we added proper stream cancellation to handle user disconnects gracefully.*
+The game supports **1 to 5 bot opponents**, each with their own turn logic. The interface is clean and easy to follow, and everything in the game is designed to feel smooth and readable. Since it’s all done without any frontend frameworks, a lot of care went into keeping the UI organized, animated and visually clear.
 
+Most actions like drawing cards, passing turns, giving cards, and finishing sets are animated — all done using CSS for performance. Visual cues, transitions and little effects help players quickly understand what’s happening at any moment.
 
-## Choose Your Cancellation Strategy
+## Features
 
-| Method               | Use Case                              | Pros                        | Cons                           |
-|----------------------|---------------------------------------|-----------------------------|--------------------------------|
-| HTTP Disconnect      | FastAPI streaming endpoints           | Simple, no infra needed     | Relies on ASGI behavior        |
-| AbortController      | Browser clients                       | Instant client-side cancel  | Doesn't notify backend cleanly |
-| WebSocket Disconnect | Real-time chat                        | Clean disconnect handling   | Requires WebSocket support     |
-| SSE Monitoring       | Live updates / events                 | Works with standard HTTP    | Not all clients support SSE    |
-| Redis Stop Endpoint  | Mobile apps, stateful backend control | Durable + works across tabs | Adds Redis dependency          |
+- **1–5 Bot Players**  
+  Play against multiple bot opponents with simple but effective decision logic.
 
-## Pattern 1: HTTP Disconnect Detection (Agno's Primary Method)
+- **Smooth Animations**  
+  Card movements, transitions and turn indicators are all animated for clarity.
 
-This is how Agno handles most streaming cancellations. Monitor the HTTP request for disconnect messages:
+- **SFX Toggle**  
+  Optional sound effects that can be switched on or off anytime.
 
-```java
-balls and balls
-```
+- **Accessible Gameplay Flow**  
+  Turns, requests, and card exchanges are easy to follow thanks to visual indicators.
 
-```python
-async def chat_message(request: Request):
-    async def generate_response():
-        try:
-            async with cancel_on_disconnect(request):
-                # Stream AI response from agent
-                async for chunk in agent.get_streaming_response(message, thread_id=thread_id):
-                    yield create_event(EventType.MESSAGE_CHUNK, {"content": chunk.get("content")})
-        except get_cancelled_exc_class():
-            logger.info(f"Cancellation detected for thread {thread_id}")
-            # Save partial response in database
-            await save_partial_response(thread_id, partial_content)
-            
-    return EventSourceResponse(generate_response())
-```
+- **Completely Local**  
+  No sign-in, no backend, no SSR — just <a href="https://mfarhanz.github.io/go-fish" target="_blank" rel="noopener noreferrer">open the site</a> and start playing.
 
-**What Goes Wrong**: Forget to shield database operations and you'll save corrupted partial responses when users hit stop mid-inference.
+## Notes
 
-**The Fix**: Always shield critical operations:
-```python
-# Shield database saves from cancellation
-await asyncio.shield(save_cancelled_messages())
-```
+The UI isn’t responsive yet, and since I built this without any libraries or frameworks, retrofitting responsiveness is something I’ll revisit later. It also doesn’t support multiplayer (yet!) — the current version is strictly player-vs-bots.
 
-## Pattern 2: Client-Side AbortController + Server Detection
-
-Layer client and server cancellation for instant feedback:
-
-```javascript
-// Agno frontend implementation
-const controller = new AbortController();
-const response = await fetch('/api/message', {
-    signal: controller.signal,
-    method: 'POST',
-    body: formData
-});
-
-// Stop button immediately cancels request
-stopButton.onclick = () => {
-    controller.abort();
-    showStatus("Stopping...");
-};
-```
-
-**What Goes Wrong**: AbortController kills the connection but doesn't give the backend time to clean up. You'll leak resources.
-
-**The Fix**: Combine with server-side disconnect detection so both sides clean up properly.
-
-## Pattern 3: WebSocket Disconnect for Real-Time Apps
-
-For chat-style applications where connection state matters:
-
-```python
-@app.websocket("/ws/chat")
-async def websocket_chat(websocket: WebSocket):
-    await websocket.accept()
-    try:
-        async for message in websocket.iter_text():
-            async for chunk in agno_agent.stream_response(message):
-                await websocket.send_json({"type": "chunk", "data": chunk})
-    except WebSocketDisconnect:
-        logger.info("Client disconnected from WebSocket")
-        await cleanup_agent_resources()
-```
-
-**What Goes Wrong**: WebSocket disconnects don't automatically cancel your AI inference tasks. The connection dies but your expensive LLM call keeps running.
-
-**The Fix**: Use task groups to tie WebSocket lifecycle to inference lifecycle.
-
-## Pattern 4: Redis-Backed Stop Control (For Complex UX)
-
-When you need durable stop signals that work across browser tabs or mobile app backgrounding:
-
-```python
-@app.post("/agno/chat/start")
-async def start_agno_chat(request: ChatRequest):
-    request_id = str(uuid4())
-    
-    async def generate():
-        try:
-            for i, chunk in enumerate(agno_agent.stream_inference(request.message)):
-                # Check Redis for stop signal every few iterations
-                if i % 5 == 0 and redis_client.get(f"agno:stop:{request_id}"):
-                    # Save progress state
-                    await redis_client.set(f"agno:state:{request_id}", 
-                                         json.dumps({
-                                             "partial_response": "".join(response_parts),
-                                             "tokens_processed": i,
-                                             "stopped_at": time.time()
-                                         }), ex=3600)
-                    yield create_event("stop", {"message": "Stopped by user", "tokens": i})
-                    break
-                    
-                yield create_event("chunk", {"content": chunk, "request_id": request_id})
-        except Exception as e:
-            await redis_client.set(f"agno:error:{request_id}", str(e), ex=300)
-    
-    return StreamingResponse(generate())
-
-@app.post("/agno/chat/stop/{request_id}")
-async def stop_agno_chat(request_id: str):
-    redis_client.set(f"agno:stop:{request_id}", "true", ex=300)
-    return {"status": "stopping", "request_id": request_id}
-```
-
-**What Goes Wrong**: Checking Redis on every token is expensive. Check every N iterations instead.
-
-**When to Use This**: Mobile apps where network drops, multi-tab scenarios, or when you need to resume from where you stopped.
-
-## UX Before vs After
-
-🔁 **Before**: User clicks "stop" — browser hangs 15 seconds, then maybe times out  
-✅ **After**: User clicks "stop" — server halts in 100ms, UI shows "cancelled", progress saved
-
-🚨 **Before**: 200 orphaned inference tasks per minute = 30% CPU waste  
-💡 **After**: Only 2-3 lingering tasks = 28% CPU savings during peak load
-
-## Battle-Tested Lessons
-
-**Shield Critical Operations**: A user hit stop mid-stream and we corrupted a database entry because the transaction got cancelled. Always wrap DB commits in `asyncio.shield()`.
-
-**Log Everything**: Cancellation events saved us during a bug where 20% of users hit 'stop' after 1 second. Logs showed it was a UX issue, not a technical one.
-
-**Test With Real Networks**: Works perfect on localhost, breaks behind nginx in production. Test cancellation with actual proxy setups and mobile connections.
-
-**Handle Partial State**: Users cancelled after generating 90% of a long response. Save progress or they'll be frustrated restarting from zero.
-
-## The Agno Implementation
-
-In practice, Agno layers multiple patterns:
-
-1. **HTTP disconnect** for standard web requests  
-2. **AbortController** for instant client feedback  
-3. **Redis state** for mobile/unreliable connections  
-4. **Database shielding** for data integrity  
-
-This combination handles everything from impatient users to network drops to browser crashes.
-
-The result? Streaming AI that actually respects the stop button — and servers that don't burn CPU on work nobody wants.
-
-*Want to see the full implementation? Check out the [Agno repository](https://github.com/agno-agi/agno) or dive into [issue #3106](https://github.com/agno-agi/agno/issues/3106#issuecomment-3212047469) for the technical details.*
+Despite those limitations, I’m really happy with how it turned out, and it became a meaningful little project tied to memories of home.

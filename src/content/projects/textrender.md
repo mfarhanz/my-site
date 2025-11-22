@@ -1,28 +1,16 @@
 ---
-title: "CoolCounter"
-description: "Just another counter webapp."
-date: "2025-10-19"
-tags: ["Javascript", "React", "TailwindCSS"]
+title: "TextRender"
+description: "ASCII image renderer in terminal"
+date: "2024-01-15"
+tags: ["Python", "Numpy", "PIL"]
 published: true
 links:
   - text: "GitHub"
     url: "https://github.com/mfarhanz/Random-Scripts/tree/main/Text%20Render"
-  - text: "Live Demo"
-    url: "#"
-    icon: "external"
 ---
 
-# About the Project
+## About
 
-This is a sample project content written in Markdown/MDsveX.  
-You can write static paragraphs, headings, lists, code blocks, images, etc.
+**TextRender** is a small Python CLI script that converts images or GIFs into ASCII art displayed in the terminal. It uses a duotone palette, assigning one symbol for the foreground and one for the background.
 
-## Features
-
-- Feature 1: describe it briefly
-- Feature 2: describe it briefly
-- Feature 3: etc.
-
-## Notes
-
-Optional notes about the project, references, screenshots, or demos.
+This project was purely experimental, created to explore image thresholding, numpy masking, and basic terminal rendering. Beyond displaying images in ASCII, it serves no additional purpose.
