@@ -2,6 +2,10 @@
 	import { Github, Linkedin, Mail } from 'lucide-svelte';
 </script>
 
+<svelte:head>
+	<title>Farhan Zia</title>
+</svelte:head>
+
 <section
 	class="section grid-responsive pb-[10vh] pt-[9vh] smooth-trans-8"
 >
@@ -83,7 +87,7 @@
 
 		<div class="flex w-[50%] justify-center md:-mt-[4vh] md:w-[40%] md:justify-end">
 			<img
-				src="https://avatars.githubusercontent.com/u/51290906?v=4"
+				src="/avatar.webp"
 				alt="My Github avatar"
 				title="My Github avatar"
 				style:--tag="github-avatar"

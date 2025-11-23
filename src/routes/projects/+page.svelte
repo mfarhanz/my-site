@@ -77,19 +77,25 @@
 	$: {
 		projects = remapProjects();
 		if (selectedFilter === 'date') {
-			const sorted = [...projects].sort((a, b) => {
-				const slugA = a.route.split('/').pop()!;
-				const slugB = b.route.split('/').pop()!;
-				const dateA = new Date(lastUpdatedMap[slugA]).getTime();
-				const dateB = new Date(lastUpdatedMap[slugB]).getTime();
-				return dateB - dateA;
+			const sorted = [...projects].map((p) => {
+				const slug = p.route.split('/').pop()!;
+				return {
+					...p,
+					date: lastUpdatedMap[slug] // attach date to show on ContentCard blocks
+				};
+			}).sort((a, b) => {
+				return new Date(b.date).getTime() - new Date(a.date).getTime();
 			});
-			projects = sorted;
+			projects = sorted;	// trigger reactivity to update projects
 		} else if (selectedFilter === 'tags') {
 			projects = filterObjectsByTags(projects, filterTags);
 		}
 	}
 </script>
+
+<svelte:head>
+	<title>Farhan Zia - projects</title>
+</svelte:head>
 
 <section
 	class="section smooth-trans-8 gap-[3vh] bg-light-background pb-[8vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
@@ -109,6 +115,7 @@
 				<ToggleGroup.Item
 					value="date"
 					aria-label="Sort by Date"
+					title="Sort projects by last updated date"
 					class="button-text-sizing toggle-group-item smooth-trans-3 border-r-[0.1vw]"
 				>
 					Date
@@ -116,6 +123,7 @@
 				<ToggleGroup.Item
 					value="tags"
 					aria-label="Filter by Tags"
+					title="Filter projects by tags list"
 					class="button-text-sizing toggle-group-item smooth-trans-3"
 				>
 					Tags

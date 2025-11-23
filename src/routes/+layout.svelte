@@ -11,7 +11,7 @@
 
 	let { children, data } = $props();
 	let pathname = $derived(data.pathname);
-	let htmlElement: HTMLElement | null = null;
+	let htmlElement: HTMLElement | null;
 	
 	prepareViewTransition();
 
@@ -19,7 +19,7 @@
         if (typeof window !== 'undefined') {
             htmlElement = document.documentElement;
             // ensure initial load is at the top instantly (no auto smooth scroll)
-            window.scrollTo(0, 0);
+            // window.scrollTo(0, 0);   // dont need this i think
         }
     });
 
@@ -41,16 +41,15 @@
                 behavior: 'instant' 
             });
         }
-        // Always restore the default scroll-behavior after the transition/scroll is complete
-        // this re-enables smooth scrolling for anchor links on the page.
+        // restore the default scroll-behavior after the transition/scroll is complete
         htmlElement.style.scrollBehavior = ''; // resets to default/CSS-defined value
     });
 </script>
 
 <svelte:head>
 	<link rel="icon" href="/favicon.svg" />
+    <title>Farhan Zia</title>
 </svelte:head>
-
 
 <div
 	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip text-light-text bg-light-background dark:bg-dark-background dark:text-dark-text"

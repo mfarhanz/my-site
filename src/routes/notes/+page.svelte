@@ -13,6 +13,10 @@
 	}));
 </script>
 
+<svelte:head>
+	<title>Farhan Zia - notes</title>
+</svelte:head>
+
 <section
 	class="section smooth-trans-8 gap-[4vh] bg-light-background pb-[8vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
 >

@@ -10,7 +10,7 @@ async function getAllContent() {
     const paths = import.meta.glob<MarkdownModule<Omit<Note, 'slug'>>>('../../../content/notes/*.md', { eager: true })
     const entries: Note[] = []
 
-    const banners = import.meta.glob('/src/lib/assets/notes/*.{png,jpg,jpeg,bmp,gif}', {
+    const banners = import.meta.glob('/src/lib/assets/notes/*.{png,jpg,jpeg,webp,bmp,gif}', {
         eager: true,
         import: 'default'
     }) as Record<string, string>

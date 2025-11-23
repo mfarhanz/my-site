@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { ContentItem } from '$lib/types/content';
-	import { randomBetween, setupNavigationHandler } from '$lib/utils/helpers';
+	import { randomBetween, setupNavigationHandler, formatDate } from '$lib/utils/helpers';
 	import { beforeNavigate, afterNavigate } from '$app/navigation';
 
 	let { item }: { item: ContentItem } = $props();
@@ -53,12 +53,21 @@
 		</div>
 	{/if}
 
-	<div
-		style={shouldTag ? `--tag:${item.route?.split('/').pop()}-title` : undefined}
-		class={`subtitle-sizing-0 title-font font-medium text-light-primary dark:text-dark-primary smooth-trans-${randomBetween(1, 10)}`}
-	>
-		{item.title}
-	</div>
+	{#if item.title || item.date}
+		<div class="flex w-full items-center justify-between">
+			<div
+				style={shouldTag ? `--tag:${item.route?.split('/').pop()}-title` : undefined}
+				class="subtitle-sizing-0 title-font font-medium text-light-primary dark:text-dark-primary smooth-trans-{randomBetween(1, 10)}"
+			>
+				{item.title}
+			</div>
+			{#if item.date}
+				<div class="alt-text-sizing opacity-60">
+					{formatDate(item.date.split('T')[0] ?? '', undefined, undefined, true)}
+				</div>
+			{/if}
+		</div>
+	{/if}
 
 	<div
 		class={`text-sizing-1 text-light-text dark:text-dark-text smooth-trans-${randomBetween(1, 10)}`}

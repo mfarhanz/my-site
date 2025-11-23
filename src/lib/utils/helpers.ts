@@ -46,10 +46,17 @@ export function clickOutside(node: HTMLElement) {
 }
 
 type DateStyle = Intl.DateTimeFormatOptions['dateStyle']
-export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en') {
-    const dateToFormat = new Date(date.replaceAll('-', '/'))
-    const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle })
-    return dateFormatter.format(dateToFormat)
+export function formatDate(date: string, dateStyle: DateStyle = 'medium', locales = 'en', short = false) {
+    const dateToFormat = new Date(date.replaceAll('-', '/'));
+    if (short) {
+		const formatter = new Intl.DateTimeFormat(locales, {
+			month: 'short',
+			year: 'numeric'
+		});
+		return formatter.format(dateToFormat);
+	}
+    const dateFormatter = new Intl.DateTimeFormat(locales, { dateStyle });
+    return dateFormatter.format(dateToFormat);
 }
 
 import { onNavigate } from '$app/navigation';
@@ -133,11 +140,17 @@ export async function getLastUpdatedTimesForProjects(projects: Project[]) {
 
 export function filterObjectsByTags<T extends { tags: string[] }>(items: T[], tags: string[]) {
     if (tags.length === 0) return items;
-     // make both the 'tags' and item.tags lowercase before filtering
+
     const lowerTags = tags.map(tag => tag.toLowerCase());
+
     return items.filter(item => {
         const itemTagsLower = item.tags.map(tag => tag.toLowerCase());
-        return lowerTags.every(tag => itemTagsLower.includes(tag));
+        // every tag in the filter must match at least one tag in itemTags (subset match)
+        return lowerTags.every(filterTag =>
+            itemTagsLower.some(itemTag =>
+                itemTag.includes(filterTag) || filterTag.includes(itemTag)
+            )
+        );
     });
 }
 

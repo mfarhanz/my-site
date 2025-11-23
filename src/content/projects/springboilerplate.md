@@ -9,40 +9,42 @@ links:
     url: "https://github.com/mfarhanz/SpringBackendTemplate"
 ---
 
-## Spring Boilerplate Backend
+## About
 
-**Spring Boilerplate Backend** is a production-ready, modular backend template built with **Java** and **Spring Boot**, designed to help developers bootstrap full-stack applications quickly. It provides essential features out-of-the-box, saving hours of setup time while maintaining clean, understandable code.
+**Spring Boilerplate Backend** is a production-ready, modular backend template built with **Java** and **Spring Boot**, designed to help developers bootstrap full-stack applications quickly. It comes with essential infrastructure already set up — authentication, migrations, rate limiting, logging, and more — so you can focus on building features instead of repeating boilerplate work.
 
-### Key Features
+## Key Features
 
 - **Authentication & Security**  
-  - JWT-based authentication with access/refresh token flows  
-  - OTP support for email verification and password resets  
-  - Role-Based Access Control (RBAC)  
-  - Rate limiting using Bucket4j  
+  - JWT-based authentication with access/refresh token flows for secure session handling  
+  - OTP support for tasks like email verification and password resets  
+  - Flexible Role-Based Access Control (RBAC) for protecting endpoints  
+  - Per-IP rate limiting via Bucket4j to prevent abuse
 
 - **Architecture & Code Design**  
-  - Modular RESTful API structure  
-  - Repository abstraction via Spring Data JPA  
-  - DTOs for clean request/response handling  
-  - Easy-to-understand module separation  
+  - Modular RESTful API structure, easy to navigate and extend  
+  - Clean repository abstraction using Spring Data JPA  
+  - DTOs for separating internal models from request/response payloads  
+  - Clear module separation to help developers understand and modify the system
 
 - **Database & Migrations**  
-  - Flyway scripts for versioned database migrations  
-  - Predefined tables for Users, Tokens, Roles, Documents, and Collections  
-  - Optional seed data  
+  - Flyway SQL migrations for predictable, versioned schema updates  
+  - Predefined tables for common backend features (Users, Tokens, Roles, Documents, Collections)  
+  - Optional default seed data for immediate testing
 
 - **Auth Flows & Utilities**  
-  - Signup, login, password reset, email verification  
-  - Cron jobs for token/database maintenance  
-  - Centralized logging with Log4j2  
+  - Built-in flows for signup, login, password reset, and email verification  
+  - Scheduled cron jobs to clean up expired tokens and perform routine maintenance  
+  - Centralized and configurable logging via Log4j2
 
-### Purpose
+## Purpose
 
-Originally intended as the backend for a full-stack app with a React Native frontend, the project evolved into a **template/boilerplate** for developers to build upon. The backend is fully functional and ready to use, while a minimal frontend template exists privately for splash and authentication flows.  
+Originally intended for a full-stack application with a React Native frontend, this project evolved into a **backend template** so developers can build new apps quickly without recreating foundational systems.  
+A small React Native frontend template is currently being worked on and may be released publicly once it’s more complete.
 
-This boilerplate is ideal for solo developers, rapid prototyping, or small teams who want a solid, modular backend with authentication, role management, and essential utilities—without starting everything from scratch.
+This backend is ideal for solo developers, prototypes, or small teams who want a modular, secure starting point with authentication, roles, migrations, and an organized structure already handled.
 
-### Notes
+## Notes
 
-The project is still a work-in-progress. Upcoming improvements include Docker support, CI/CD integration, extended documentation, unit/integration tests, and additional modular features.
+The project is still a work-in-progress. Planned improvements include Docker support (to avoid setup issues), CI/CD tooling, expanded documentation, example API usage, testing coverage, and additional optional modules.
+

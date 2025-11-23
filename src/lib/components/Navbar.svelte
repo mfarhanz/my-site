@@ -7,6 +7,7 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import { derived } from 'svelte/store';
+	import { toast } from 'svelte-sonner';
 
 	let menuOpen = false;
 	const isHome = derived(page, ($page) => $page.url.pathname === '/');
@@ -20,6 +21,8 @@
 
 	function toggleBackgroundEffect() {
         backgroundEffectEnabled.update(v => !v);
+		if ($backgroundEffectEnabled) toast('Background effects are ON');
+		else toast('Background effects are OFF');
     }
 </script>
 
@@ -29,7 +32,7 @@
 >
 	<div class="flex items-center gap-[1vw]">
 		<img
-			src="https://avatars.githubusercontent.com/u/51290906?v=4"
+			src="/avatar.webp"
 			alt="Farhan"
 			class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
 			style:--tag="github-avatar"
@@ -70,6 +73,7 @@
 				on:click={toggleBackgroundEffect}
 				class="hidden sm:inline-flex smooth-trans-2 hover:tilt-zoom-1 p-2"
 				aria-label="Toggle background effect"
+				title="Toggle background effects"
 			>
 				{#if $backgroundEffectEnabled}
 					<MonitorPlay class="icon-sizing-2" />

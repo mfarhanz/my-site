@@ -11,6 +11,7 @@
 				href="https://github.com/mfarhanz" 
 				class="flex link-hover smooth-trans-2 hover:tilt-zoom-1"
 				target="_blank" rel="noopener noreferrer"
+				title="GitHub"
 			>
 				<Github class="icon-sizing-1" />
 			</a>
@@ -18,6 +19,7 @@
 				href="https://www.linkedin.com/in/mfarhanz" 
 				class="flex link-hover smooth-trans-2 hover:tilt-zoom-1"
 				target="_blank" rel="noopener noreferrer"
+				title="LinkedIn"
 			>
 				<Linkedin class="icon-sizing-1" />
 			</a>
@@ -25,6 +27,7 @@
 				href="mailto:mfz.bin@gmail.com" 
 				class="flex link-hover smooth-trans-2 hover:tilt-zoom-1"
 				target="_blank" rel="noopener noreferrer"
+				title="Mail"
 			>
 				<Mail class="icon-sizing-1" />
 			</a>

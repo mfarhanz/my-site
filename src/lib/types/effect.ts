@@ -16,3 +16,24 @@ export type WordSprite = {
     width: number;
     height: number;
 };
+
+export interface WorkerMessage {
+  type: 'update';
+  deltaTime: number;
+  width: number;
+  height: number;
+  particles: WordParticle[];
+  spawnNew: boolean;
+}
+
+export interface WorkerResponse {
+  type: 'particles';
+  particles: WordParticle[];
+  spawned?: boolean; // optional
+}
+
+export interface SpawnMessage {
+  type: 'spawn';
+  width: number;
+  height: number;
+}

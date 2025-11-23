@@ -1,7 +1,8 @@
 export interface ContentItem {
   src?: string;
-  title?: string;
-  description: string;
-  tags: string[];
+  title: string;
+  date?: string;
+  description?: string;
+  tags?: string[];
   route?: string;
 }
