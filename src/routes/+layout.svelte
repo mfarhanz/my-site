@@ -52,7 +52,7 @@
 </svelte:head>
 
 <div
-	class="smooth-trans-8 min-h-fit min-w-fit overflow-clip text-light-text bg-light-background dark:bg-dark-background dark:text-dark-text"
+	class="smooth-trans-6 min-h-fit min-w-fit overflow-clip text-light-text bg-light-background dark:bg-dark-background dark:text-dark-text"
 >
     <FloatingWords enabled={$backgroundEffectEnabled} />
 	<Navbar />
@@ -63,7 +63,7 @@
           }}
     />
 	{#key pathname}
-		<main style="view-transition-name: main" class="smooth-trans-8 min-h-screen">
+		<main style="view-transition-name: main" class="main smooth-trans-6">
 			{@render children?.()}
 		</main>
 	{/key}

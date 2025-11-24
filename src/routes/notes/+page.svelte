@@ -4,6 +4,7 @@
 	import type { Note } from '$lib/types/note';
 
 	export let data;
+	
 	$: notes = (data.notes ?? []).map((note: Note) => ({
 		src: note.image,
 		title: note.title,
@@ -18,7 +19,7 @@
 </svelte:head>
 
 <section
-	class="section smooth-trans-8 gap-[4vh] bg-light-background pb-[8vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
+	class="section gap-[4vh] pb-[8vh] pt-[9vh] text-light-text dark:text-dark-text smooth-trans-8"
 >
 	<h1 class="title-font title-sizing smooth-trans-8 font-bold">Notes & Stuff</h1>
 	{#if notes && notes.length > 0}

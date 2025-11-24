@@ -30,14 +30,10 @@
 				name = '';
 				email = '';
 				message = '';
-				toast('Message sent!', {
-					duration: Infinity,
-					class:
-						'bg-blue-800 text-white font-semibold px-4 py-2 rounded-lg shadow-lg flex justify-between items-center'
-				});
+				toast('Message sent!');
 			} else {
 				const data = await res.json().catch(() => ({}));
-				toast(data.error);
+				toast(`Request error: ${data.error}`);
 				status = 'error';
 			}
 		} catch (err) {
@@ -80,6 +76,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Farhan Zia - contact</title>
+</svelte:head>
+
 <section
 	class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]"
 >
@@ -101,6 +101,7 @@
 				required
 				type="text"
 				placeholder="Your Name"
+				maxlength="50"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<input
@@ -108,6 +109,7 @@
 				required
 				type="email"
 				placeholder="Your Email"
+				maxlength="50"
 				class="text-sizing-1 input-field-lg smooth-trans-4"
 			/>
 			<textarea
@@ -116,6 +118,7 @@
 				rows="3"
 				use:autoResize
 				placeholder="Your Message"
+				maxlength="3000"
 				class="text-sizing-1 input-field-lg smooth-trans-4 resize-none overflow-hidden"
 			></textarea>
 			<!-- HP START -->

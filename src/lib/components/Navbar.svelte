@@ -32,10 +32,10 @@
 >
 	<div class="flex items-center gap-[1vw]">
 		<img
-			src="/avatar.webp"
+			src="/ghavatar.webp"
 			alt="Farhan"
 			class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
-			style:--tag="github-avatar"
+			style:--tag="profile-avatar"
 			class:hidden={$isHome}
 		/>
 

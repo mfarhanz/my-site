@@ -97,8 +97,8 @@ export function setupNavigationHandler(
     return unsubscribe;
 }
 
-import type { Project } from '$lib/types/project';
 import { API_BASE } from '$lib/config';
+import type { Project } from '$lib/types/project';
 export async function getLastUpdatedTimesForProjects(projects: Project[]) {
     const entries = await Promise.all(
         projects.map(async (proj) => {
@@ -138,35 +138,17 @@ export async function getLastUpdatedTimesForProjects(projects: Project[]) {
     return entries;
 }
 
-export function filterObjectsByTags<T extends { tags: string[] }>(items: T[], tags: string[]) {
+import type { ContentItem } from '$lib/types/content';
+export function filterObjectsByTags(items: ContentItem[], tags: string[]): ContentItem[] {
     if (tags.length === 0) return items;
 
     const lowerTags = tags.map(tag => tag.toLowerCase());
-
     return items.filter(item => {
-        const itemTagsLower = item.tags.map(tag => tag.toLowerCase());
-        // every tag in the filter must match at least one tag in itemTags (subset match)
+        const itemTagsLower = item.tags?.map(tag => tag.toLowerCase()) ?? [];
         return lowerTags.every(filterTag =>
             itemTagsLower.some(itemTag =>
                 itemTag.includes(filterTag) || filterTag.includes(itemTag)
             )
         );
     });
-}
-
-export function mapObjectToBlockObject<T>(
-	items: T[],
-	src: keyof T,
-	title: keyof T,
-	description: keyof T,
-	tags: keyof T,
-	route: (item: T) => string
-) {
-	return items.map(item => ({
-		src: item[src] as string,
-		title: item[title] as string,
-		description: item[description] as string ?? '',
-		tags: item[tags] as string[] ?? [],
-		route: route(item)
-	}));
 }

@@ -6,9 +6,7 @@
 	<title>Farhan Zia</title>
 </svelte:head>
 
-<section
-	class="section grid-responsive pb-[10vh] pt-[9vh] smooth-trans-8"
->
+<section class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]">
 	<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
 		<h1 class="title-font title-sizing smooth-trans-8 font-bold">
 			Hey! I'm <span class="text-light-primary dark:text-dark-primary">Farhan</span>
@@ -17,11 +15,26 @@
 		<p
 			class="text-sizing-2 smooth-trans-8 w-full text-light-text/80 dark:text-dark-text/80 md:w-[90%] lg:w-[85%]"
 		>
-			I'm a developer who loves building creative web experiences using
-			<span class="text-light-primary dark:text-dark-primary"> SvelteKit</span>,
-			<span class="text-light-primary dark:text-dark-primary"> TypeScript</span>, and
-			<span class="text-light-primary dark:text-dark-primary"> TailwindCSS</span>.
+			I'm a developer based in Toronto, spending my days building practical tools and webapps in <span
+				class="text-light-primary dark:text-dark-primary">Python</span
+			>
+			and <span class="text-light-primary dark:text-dark-primary">Javascript</span>, with the hope
+			of making people's lives a bit easier.
 		</p>
+
+		<p
+			class="text-sizing-3 mt-2 select-none text-light-text/50 blur-[8px] transition-all duration-300
+         hover:blur-[0px] dark:text-dark-text/50"
+		>
+			<em class="hover:blur-[0px]">
+				I'm currently seeking opportunities — feel free to
+				<a href="/contact" class="font-semibold text-light-primary dark:text-dark-primary">
+					reach out
+				</a>
+				if my skills could be a good fit!
+			</em>
+		</p>
+
 		<div class="flex items-center gap-3 sm:gap-[2vw]">
 			<a
 				href="https://github.com/mfarhanz"
@@ -64,7 +77,7 @@
 	</div>
 </section>
 
-<section class="section gap-[4vh] pb-[8vh] smooth-trans-8">
+<section class="section smooth-trans-8 gap-[4vh] pb-[8vh]">
 	<h2 class="subtitle-font subtitle-sizing-2 font-medium">About Me</h2>
 
 	<div
@@ -74,24 +87,25 @@
 			class="text-sizing-2 smooth-trans-8 w-full leading-relaxed text-light-text/80 dark:text-dark-text/80 md:w-3/4"
 		>
 			<p class="mb-[2vh]">
-				I'm passionate about building beautiful, performant web experiences that combine creativity
-				with precision. My focus is on crafting thoughtful user interfaces, experimenting with
-				interactions, and pushing what's possible on the web.
+				I graduated from Memorial University in 2024 with a degree in computer science. While most
+				of my professional experience has been in customer service, my primary focus has always been in
+				software engineering.
 			</p>
-			<p>
-				When I'm not coding, I enjoy learning new technologies, exploring design concepts, and
-				contributing to open-source projects. I believe great design and code go hand in hand — both
-				require curiosity, care, and iteration.
+			<p class="mb-[2vh]">
+				I work with a variety of tools and frameworks, including Python, NumPy, Transformers,
+				SvelteKit, React, TailwindCSS, Docker, and cloud platforms like Vercel and Cloudflare Pages,
+				to name a few.
 			</p>
+
+			<p>Outside of development, I enjoy cycling, questionable cooking, and gaming.</p>
 		</div>
 
 		<div class="flex w-[50%] justify-center md:-mt-[4vh] md:w-[40%] md:justify-end">
 			<img
 				src="/avatar.webp"
-				alt="My Github avatar"
-				title="My Github avatar"
-				style:--tag="github-avatar"
-				class="avatar smooth-trans-8 aspect-square w-[40vw] sm:w-[70vw] md:w-[35vw] lg:w-[70vw] max-w-[300px] sm:max-w-[23vw] rounded-full object-cover shadow-lg"
+				alt="Avatar"
+				style:--tag="profile-avatar"
+				class="avatar smooth-trans-8 aspect-square w-[40vw] max-w-[300px] rounded-full object-cover shadow-lg sm:w-[70vw] sm:max-w-[23vw] md:w-[35vw] lg:w-[70vw]"
 			/>
 		</div>
 	</div>

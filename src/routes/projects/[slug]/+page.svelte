@@ -31,13 +31,13 @@
 {#if data.meta.image}
 	<div class="relative overflow-hidden">
 		<div
-			class="smooth-trans-8 h-[25vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
+			class="h-[25vh] w-full bg-light-background dark:bg-dark-background sm:h-[60vh] md:h-[70vh] lg:h-[60vh] smooth-trans-8"
 		>
 			<img
 					src={data.meta.image}
 					alt={data.meta.title}
 					style={shouldTag ? `--tag:${data.meta.slug}` : undefined}
-					class="smooth-trans-8 absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh]"
+					class="absolute left-1/2 h-[25vh] -translate-x-1/2 object-cover opacity-80 dark:opacity-50 sm:h-[60vh] md:h-[70vh] lg:h-[60vh] smooth-trans-8"
 				/>
 			<div
 				class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-light-background dark:to-dark-background"

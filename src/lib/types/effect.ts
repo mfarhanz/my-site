@@ -1,4 +1,4 @@
-export type WordParticle = {
+export interface WordParticle {
     word: string;
     x: number;
     y: number;
@@ -10,7 +10,7 @@ export type WordParticle = {
     rotationSpeed: number;
 };
 
-export type WordSprite = {
+export interface WordSprite {
     x: number;
     y: number;
     width: number;

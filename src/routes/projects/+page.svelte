@@ -4,25 +4,31 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import * as ToggleGroup from '$lib/components/ui/toggle-group';
+	import { toast } from 'svelte-sonner';
 	import ContentCard from '$lib/components/ContentCard.svelte';
 	import ContentSection from '$lib/components/ContentSection.svelte';
+	import * as ToggleGroup from '$lib/components/ui/toggle-group';
 	import type { Project } from '$lib/types/project';
+	import type { ContentItem } from '$lib/types/content';
 	import {
 		addStringToSet,
 		removeStringFromSet,
 		getLastUpdatedTimesForProjects,
-		filterObjectsByTags,
-		mapObjectToBlockObject
+		filterObjectsByTags
 	} from '$lib/utils/helpers';
 
 	export let data;
+	let projects: ContentItem[];
+	let original: ContentItem[];
 	let selectedFilter: string | undefined;
 	let filterTags: string[] = [];
-	let newTagInput = '';
+	let tagInput = '';
 	let mounted = false;
+	let isFilterSelected = false;
 
 	onMount(async () => {
+		projects = original; // assign projects initially on page navigation
+
 		if (!lastUpdatedMap || Object.keys(lastUpdatedMap).length === 0) {
 			const entries = await getLastUpdatedTimesForProjects(data.projects ?? []);
 			// convert array of { slug, updated_at } to map
@@ -51,22 +57,8 @@
 		}
 	});
 
-	function remapProjects() {
-		return mapObjectToBlockObject(
-			data.projects ?? [],
-			'image',
-			'title',
-			'description',
-			'tags',
-			(p) => `/projects/${p.slug}`
-		);
-	}
-
-	$: if (mounted) {
-		localStorage.setItem('filterTags', JSON.stringify(filterTags));
-	}
-
-	$: projects = (data.projects ?? []).map((proj: Project) => ({
+	// store the mapped projects separately, so that it can be assigned to 'projects' to reset filters
+	$: original = (data.projects ?? []).map((proj: Project) => ({
 		src: proj.image,
 		title: proj.title,
 		description: proj.description ?? '',
@@ -74,21 +66,35 @@
 		route: `/projects/${proj.slug}`
 	}));
 
-	$: {
-		projects = remapProjects();
+	$: if (mounted) {
+		localStorage.setItem('filterTags', JSON.stringify(filterTags));
+	}
+
+	$: if (selectedFilter && !isFilterSelected) {
+		isFilterSelected = true;
+	}
+
+	// filtering only when inputs change
+	$: if (isFilterSelected) {
 		if (selectedFilter === 'date') {
-			const sorted = [...projects].map((p) => {
-				const slug = p.route.split('/').pop()!;
-				return {
-					...p,
-					date: lastUpdatedMap[slug] // attach date to show on ContentCard blocks
-				};
-			}).sort((a, b) => {
-				return new Date(b.date).getTime() - new Date(a.date).getTime();
-			});
-			projects = sorted;	// trigger reactivity to update projects
+			const sorted:ContentItem[] = [...original]
+				.map((p) => {
+					const slug = p.route?.split('/').pop() ?? '';
+					return {
+						...p,
+						date: lastUpdatedMap[slug] // attach date to show on ContentCard blocks
+					};
+				})
+				.sort((a, b) => {
+					return new Date(b.date).getTime() - new Date(a.date).getTime();
+				});
+			projects = sorted; // trigger reactivity to update projects
+			toast('Projects sorted by last updated date');
 		} else if (selectedFilter === 'tags') {
-			projects = filterObjectsByTags(projects, filterTags);
+			projects = filterObjectsByTags(original, filterTags);
+		} else {
+			projects = original;
+			toast('Projects sorted by release date by default');
 		}
 	}
 </script>
@@ -98,7 +104,7 @@
 </svelte:head>
 
 <section
-	class="section smooth-trans-8 gap-[3vh] bg-light-background pb-[8vh] pt-[9vh] text-light-text dark:bg-dark-background dark:text-dark-text"
+	class="section smooth-trans-8 gap-[3vh] pb-[8vh] pt-[9vh] text-light-text dark:text-dark-text"
 >
 	<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 		<h1 class="title-font title-sizing smooth-trans-8 font-bold">Projects</h1>
@@ -159,12 +165,12 @@
 				placeholder={filterTags.length === 0 ? 'Enter a tag to filter by...' : 'Add tag...'}
 				class="text-sizing-1 input-field-sm smooth-trans-4"
 				maxlength="32"
-				bind:value={newTagInput}
+				bind:value={tagInput}
 				on:keydown={(e) => {
 					if (e.key === 'Enter') {
-						addStringToSet(filterTags, newTagInput);
+						addStringToSet(filterTags, tagInput);
 						filterTags = filterTags; // trigger svelte reactivity
-						newTagInput = ''; // clear input
+						tagInput = ''; // clear input
 					}
 				}}
 			/>

@@ -137,8 +137,12 @@
     @apply w-[1.7rem] sm:w-[2vw] md:w-[3vw] lg:w-[2vw] h-auto;
 }
 
+.main {
+    @apply min-h-screen backdrop-blur-[0.1vw] bg-light-background/70 dark:bg-dark-background/70;
+}
+
 .section {
-    @apply flex flex-col px-[12vw] bg-light-background/80 dark:bg-dark-background/80 text-light-text dark:text-dark-text;
+    @apply flex flex-col px-[12vw] text-light-text dark:text-dark-text;
 }
 
 .grid-responsive {

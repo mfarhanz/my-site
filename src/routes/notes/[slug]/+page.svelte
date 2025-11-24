@@ -29,7 +29,7 @@
 </svelte:head>
 
 <section
-	class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]"
+	class="section grid-responsive pb-[10vh] pt-[9vh] smooth-trans-8"
 >
 	{#if data.meta}
 		<div class="flex flex-col items-start justify-center gap-[1.7vh] text-left">
