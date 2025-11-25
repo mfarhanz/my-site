@@ -15,16 +15,17 @@
 		<p
 			class="text-sizing-2 smooth-trans-8 w-full text-light-text/80 dark:text-dark-text/80 md:w-[90%] lg:w-[85%]"
 		>
-			I'm a developer based in Toronto, spending my days building practical tools and webapps in <span
+			Developer based in Toronto, spending my days building practical tools and webapps in <span
 				class="text-light-primary dark:text-dark-primary">Python</span
 			>
-			and <span class="text-light-primary dark:text-dark-primary">Javascript</span>, with the hope
+			and <span class="text-light-primary dark:text-dark-primary">Typescript</span>, with the hope
 			of making people's lives a bit easier.
 		</p>
 
 		<p
-			class="text-sizing-3 mt-2 select-none text-light-text/50 blur-[8px] transition-all duration-300
-         hover:blur-[0px] dark:text-dark-text/50"
+			class="pointer-fine:block text-sizing-3 mt-2 hidden select-none text-light-text/50
+				blur-[8px] transition-all duration-300 hover:blur-[0px]
+				dark:text-dark-text/50"
 		>
 			<em class="hover:blur-[0px]">
 				I'm currently seeking opportunities — feel free to
@@ -87,14 +88,14 @@
 			class="text-sizing-2 smooth-trans-8 w-full leading-relaxed text-light-text/80 dark:text-dark-text/80 md:w-3/4"
 		>
 			<p class="mb-[2vh]">
-				I graduated from Memorial University in 2024 with a degree in computer science. While most
-				of my professional experience has been in customer service, my primary focus has always been in
-				software engineering.
+				I graduated from Memorial University in 2024 with a degree in computer science and have
+				since focused on backend development and software engineering, occasionally diving into
+				computer vision and data science.
 			</p>
 			<p class="mb-[2vh]">
-				I work with a variety of tools and frameworks, including Python, NumPy, Transformers,
-				SvelteKit, React, TailwindCSS, Docker, and cloud platforms like Vercel and Cloudflare Pages,
-				to name a few.
+				These days, I mostly build backend components with Python + Flask or Java + Spring Boot, and
+				user interfaces with SvelteKit or React using TypeScript, Node.js, and TailwindCSS. For
+				deployment and hosting, I rely on platforms like Vercel, Cloudflare Pages, and AWS.
 			</p>
 
 			<p>Outside of development, I enjoy cycling, questionable cooking, and gaming.</p>
@@ -104,7 +105,6 @@
 			<img
 				src="/avatar.webp"
 				alt="Avatar"
-				style:--tag="profile-avatar"
 				class="avatar smooth-trans-8 aspect-square w-[40vw] max-w-[300px] rounded-full object-cover shadow-lg sm:w-[70vw] sm:max-w-[23vw] md:w-[35vw] lg:w-[70vw]"
 			/>
 		</div>

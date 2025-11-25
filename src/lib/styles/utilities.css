@@ -138,7 +138,7 @@
 }
 
 .main {
-    @apply min-h-screen backdrop-blur-[0.1vw] bg-light-background/70 dark:bg-dark-background/70;
+    @apply min-h-screen backdrop-blur-[0.45vw] md:backdrop-blur-[0.2vw] lg:backdrop-blur-[0.1vw] bg-light-background/70 dark:bg-dark-background/70;
 }
 
 .section {

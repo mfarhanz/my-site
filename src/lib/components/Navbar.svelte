@@ -30,22 +30,23 @@
 	style:--tag="navbar"
 	class="sticky top-0 z-50 flex w-full px-[12vw] py-[1.5vh] md:py-[1vh] lg:py-[2.2vh] items-center justify-between backdrop-blur bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8"
 >
-	<div class="flex items-center gap-[1vw]">
+	<div class="flex items-center gap-[3vw] md:gap-[2vw] lg:gap-[1vw]">
 		<img
-			src="/ghavatar.webp"
-			alt="Farhan"
+			src="/avatar_alt.webp"
+			alt="Avatar"
 			class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
-			style:--tag="profile-avatar"
 			class:hidden={$isHome}
 		/>
 
 		<a
 			href="/"
-			style:--tag="site-title"
-			class="subtitle-sizing-1 site-title-font smooth-trans-8 glow-title pr-4 font-bold text-light-primary dark:text-dark-primary"
-		>
+			style:--tag="nav-title"
+			class="subtitle-sizing-1 site-title-font smooth-trans-8 glow-title pr-4 font-bold text-light-primary dark:text-dark-primary" 
+			class:hidden={ !$isHome && window.innerWidth >= 768 && window.innerWidth < 1024 }
+			>
 			Farhan Zia
 		</a>
+
 	</div>
 
 	<div class="flex items-center gap-[2vw]">

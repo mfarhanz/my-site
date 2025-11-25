@@ -47,7 +47,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/favicon.svg" />
+	<link rel="icon" href="/favicon.png" />
     <title>Farhan Zia</title>
 </svelte:head>
 

@@ -181,10 +181,10 @@ html.dark .code-dark {
 	animation-timing-function: ease-in-out;
 }
 
-::view-transition-old(main) {
+/* ::view-transition-old(main) {  // not sure if needed, performance wise
 	animation-name: plane-out;
 }
 
 ::view-transition-new(main) {
 	animation-name: plane-in;
-}
+} */
