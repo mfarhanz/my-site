@@ -8,8 +8,10 @@
 	import { goto } from '$app/navigation';
 	import { derived } from 'svelte/store';
 	import { toast } from 'svelte-sonner';
+	import { onMount } from 'svelte';
 
 	let menuOpen = false;
+	let isTablet = false;
 	const isHome = derived(page, ($page) => $page.url.pathname === '/');
 
 	const navLinks = [
@@ -24,6 +26,16 @@
 		if ($backgroundEffectEnabled) toast('Background effects are ON');
 		else toast('Background effects are OFF');
     }
+
+	onMount(() => {
+		const update = () => {
+			isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+		};
+
+		update();
+		window.addEventListener('resize', update);
+		return () => window.removeEventListener('resize', update);
+	});
 </script>
 
 <nav
@@ -42,7 +54,7 @@
 			href="/"
 			style:--tag="nav-title"
 			class="subtitle-sizing-1 site-title-font smooth-trans-8 glow-title pr-4 font-bold text-light-primary dark:text-dark-primary" 
-			class:hidden={ !$isHome && window.innerWidth >= 768 && window.innerWidth < 1024 }
+			class:hidden={!$isHome && isTablet}
 			>
 			Farhan Zia
 		</a>

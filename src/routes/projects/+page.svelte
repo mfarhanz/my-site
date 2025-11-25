@@ -183,8 +183,8 @@
 		<ContentCard
 			item={{
 				src: '/misc/static_2.gif',
-				title: '404',
-				description: 'No Projects Found',
+				title: '204',
+				description: 'No Content Available',
 				tags: ['', '', '']
 			}}
 		/>

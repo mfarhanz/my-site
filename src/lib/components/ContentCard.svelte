@@ -43,13 +43,23 @@
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
 			style={shouldTag ? `--tag:${item.route?.split('/').pop()}` : undefined}
 		>
+			{#if item.src.endsWith('.png') || item.src.endsWith('.jpg') || item.src.endsWith('.gif') || item.src.endsWith('.webp')}
 			<img
-					src={item.src}
-					alt="project"
-					loading="lazy"
-					decoding="async"
-					class="smooth-trans-8 h-full w-full rounded-xl object-cover"
-				/>
+				src={item.src}
+				alt="project"
+				loading="lazy"
+				decoding="async"
+				class="smooth-trans-8 h-full w-full rounded-xl object-cover"
+			/>
+			{:else}
+			<iframe
+				src={item.src}
+				frameborder="0"
+				allowfullscreen
+				title="game"
+				class="rounded-xl w-[60vw] sm:w-[60vw] md:w-[50vw] lg:w-[30vw] h-[25vh] sm:h-[25vh] md:h-[35vh] lg:h-[50vh]"
+			></iframe>
+			{/if}
 		</div>
 	{/if}
 

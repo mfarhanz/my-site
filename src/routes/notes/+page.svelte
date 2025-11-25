@@ -28,8 +28,8 @@
 		<ContentCard
 			item={{
 				src: '/misc/static_2.gif',
-				title: '404',
-				description: 'Not Found',
+				title: '204',
+				description: 'No Notes Available',
 				tags: ['', '', '']
 			}}
 		/>
