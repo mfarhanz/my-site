@@ -1,4 +1,4 @@
-import { ATLAS_SIZE } from '$lib/config';
+import { ATLAS_SIZE } from '$lib/config/constants';
 import type { WordSprite } from '$lib/types/effect';
 
 const spriteCache = new Map<string, WordSprite>();

@@ -100,7 +100,7 @@
 </script>
 
 <svelte:head>
-	<title>Farhan Zia - projects</title>
+	<!-- <title>Farhan Zia - projects</title> -->
 </svelte:head>
 
 <section

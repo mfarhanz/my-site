@@ -97,7 +97,7 @@ export function setupNavigationHandler(
     return unsubscribe;
 }
 
-import { API_BASE } from '$lib/config';
+import { API_BASE } from '$lib/config/constants';
 import type { Project } from '$lib/types/project';
 export async function getLastUpdatedTimesForProjects(projects: Project[]) {
     const entries = await Promise.all(

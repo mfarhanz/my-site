@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Farhan Zia</title>
+	<!-- <title>Farhan Zia</title> -->
 </svelte:head>
 
 <section class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]">

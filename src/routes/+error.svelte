@@ -5,7 +5,7 @@
 	let startTransition = false;
 	let showBackLink = false;
 
-    // Games sourced from https://www.retrogames.cc/  
+    // ROMs sourced from https://www.retrogames.cc/  
     // Emulated using https://www.emulatorjs.com/   (via retrogames.cc)
 	const roms = [
 		'https://www.retrogames.cc/embed/9406-pac-man-midway-1.html',
@@ -34,6 +34,10 @@
 		history.back();
 	}
 </script>
+
+<svelte:head>
+	<title>404...?</title>
+</svelte:head>
 
 <section
 	class="section smooth-trans-8 gap-[4vh] pb-[8vh] pt-[9vh] text-light-text dark:text-dark-text"

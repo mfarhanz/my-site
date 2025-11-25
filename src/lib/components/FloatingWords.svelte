@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { WORD_SPAWN_INTERVAL, FRAME_SKIP } from '$lib/config';
+	import { WORD_SPAWN_INTERVAL, FRAME_SKIP } from '$lib/config/constants';
 	import { getWordSprite, getAtlasCanvas } from '$lib/utils/word-sprite';
 	import type { WordParticle, WorkerResponse } from '$lib/types/effect';
 	

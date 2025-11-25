@@ -2,6 +2,10 @@
 	import ContentCard from '$lib/components/ContentCard.svelte';
 </script>
 
+<svelte:head>
+	<title>Note Not Found</title>
+</svelte:head>
+
 <section
 	class="section smooth-trans-8 gap-[4vh] pb-[8vh] pt-[9vh] text-light-text dark:text-dark-text"
 >

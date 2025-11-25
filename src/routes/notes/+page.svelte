@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>Farhan Zia - notes</title>
+	<!-- <title>Farhan Zia - notes</title> -->
 </svelte:head>
 
 <section

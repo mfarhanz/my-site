@@ -1,5 +1,5 @@
 import type { WordParticle, WorkerResponse, WorkerMessage, SpawnMessage } from '$lib/types/effect';
-import { MIN_WORD_FONT_SIZE, MAX_WORD_FONT_SIZE } from '$lib/config';
+import { MIN_WORD_FONT_SIZE, MAX_WORD_FONT_SIZE } from '$lib/config/constants';
 
 // related to python, java, c#
 const WORDS = [

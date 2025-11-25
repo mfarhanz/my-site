@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { toast } from 'svelte-sonner';
-	import { API_BASE } from '$lib/config';
+	import { API_BASE } from '$lib/config/constants';
 
 	export let data;
 	let name = '';
@@ -77,7 +77,7 @@
 </script>
 
 <svelte:head>
-	<title>Farhan Zia - contact</title>
+	<!-- <title>Farhan Zia - contact</title> -->
 </svelte:head>
 
 <section
