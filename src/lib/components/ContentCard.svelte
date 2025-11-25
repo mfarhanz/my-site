@@ -43,7 +43,11 @@
 			class={`h-auto w-full overflow-hidden rounded-[20%] smooth-trans-${randomBetween(1, 10)}`}
 			style={shouldTag ? `--tag:${item.route?.split('/').pop()}` : undefined}
 		>
-			{#if item.src.endsWith('.png') || item.src.endsWith('.jpg') || item.src.endsWith('.gif') || item.src.endsWith('.webp')}
+			{#if item.src?.startsWith('data:image/') || 
+				item.src.endsWith('.png') || 
+				item.src.endsWith('.jpg') || 
+				item.src.endsWith('.gif') || 
+				item.src.endsWith('.webp')}
 			<img
 				src={item.src}
 				alt="project"
