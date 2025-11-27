@@ -103,7 +103,10 @@ export default {
                         },
                     }
                 }
-            })
+            }),
+            screens: {
+                'portrait-lg': {'raw': '(min-height: 1080px) and (max-width: 1079px)'}  // large portrait screens
+            }
         },
     },
     plugins: [typography],

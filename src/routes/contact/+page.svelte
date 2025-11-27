@@ -77,7 +77,6 @@
 </script>
 
 <svelte:head>
-	<!-- <title>Farhan Zia - contact</title> -->
 </svelte:head>
 
 <section

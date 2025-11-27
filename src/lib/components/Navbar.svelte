@@ -43,12 +43,14 @@
 	class="sticky top-0 z-50 flex w-full px-[12vw] py-[1.5vh] md:py-[1vh] lg:py-[2.2vh] items-center justify-between backdrop-blur bg-light-background-trans dark:bg-dark-background-trans smooth-trans-8"
 >
 	<div class="flex items-center gap-[3vw] md:gap-[2vw] lg:gap-[1vw]">
-		<img
-			src="/avatar_alt.webp"
-			alt="Avatar"
-			class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
-			class:hidden={$isHome}
-		/>
+		<a href="/">
+			<img
+				src="/avatar_alt.webp"
+				alt="Avatar"
+				class="h-[28px] md:h-[33px] lg:h-[4.9vh] w-[28px] md:w-[33px] lg:w-[2.8vw] rounded-full object-cover shadow-md smooth-trans-8"
+				class:hidden={$isHome}
+			/>
+		</a>
 
 		<a
 			href="/"

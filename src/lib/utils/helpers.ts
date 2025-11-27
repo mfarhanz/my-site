@@ -1,5 +1,32 @@
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export function randomBetween(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+export function getRandomItem<T>(items: T[]): T | undefined {
+    if (items.length === 0) return undefined;
+    const index = randomBetween(0, items.length - 1);
+    return items[index];
+}
+
+export function createShufflePicker<T>(items: T[]) {    // modification of shuffle bag/fisher yates algorithm
+    let bag = [...items];      // working bag
+
+    function pick(): T {
+        if (bag.length === 0) {
+            // reset once we've shown everything
+            bag = [...items];
+        }
+        // pick a random element from the working copy
+        const index = randomBetween(0, bag.length - 1);
+        const item = bag[index];
+        // remove it so it can't repeat until reset
+        bag.splice(index, 1);
+        return item;
+    }
+
+    return { pick };
 }
 
 export function addStringToSet(set: string[], value: string) {
@@ -14,7 +41,6 @@ export function removeStringFromSet(set: string[], value: string) {
     if (idx !== -1) set.splice(idx, 1);
 }
 
-
 export function mergeObjects<T extends object>(merged: T, ...rest: unknown[]): T {
     for (const obj of rest) {
         if (obj && typeof obj === 'object') {
@@ -22,6 +48,42 @@ export function mergeObjects<T extends object>(merged: T, ...rest: unknown[]): T
         }
     }
     return merged;
+}
+
+import { goto } from '$app/navigation';
+export function navigateTo(route?: string ) {
+    if (!route) return;
+    // eslint-disable-next-line svelte/no-navigation-without-resolve
+    goto(route);
+}
+
+export function navigateBack() {
+    history.back();
+}
+
+export function isTouchDevice(): boolean {
+    return typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+}
+
+import { toast } from 'svelte-sonner';
+export function debounce<T extends unknown[]>(fn: (...args: T) => void, delay = 300) {
+    let inDebounce = false;
+    let endsAt = 0;
+    return (...args: T) => {
+        const now = Date.now();
+        if (inDebounce) {
+            const remaining = Math.ceil((endsAt - now) / 1000);
+            toast(`Please try again in ${remaining > 0 ? remaining : 0}s`);
+            return;
+        }
+
+        inDebounce = true;
+        endsAt = now + delay;
+        fn(...args);
+        setTimeout(() => {
+            inDebounce = false;
+        }, delay);
+    };
 }
 
 export function clickOutside(node: HTMLElement) {

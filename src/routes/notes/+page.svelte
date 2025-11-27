@@ -2,6 +2,7 @@
 	import ContentCard from '$lib/components/ContentCard.svelte';
 	import ContentSection from '$lib/components/ContentSection.svelte';
 	import type { Note } from '$lib/types/note';
+	import { navigateTo } from '$lib/utils/helpers';
 
 	export let data;
 	
@@ -10,12 +11,12 @@
 		title: note.title,
 		description: note.description ?? '',
 		tags: note.tags ?? [],
-		route: `/notes/${note.slug}`
+		route: `/notes/${note.slug}`,
+		callback: () => navigateTo(`/notes/${note.slug}`)
 	}));
 </script>
 
 <svelte:head>
-	<!-- <title>Farhan Zia - notes</title> -->
 </svelte:head>
 
 <section

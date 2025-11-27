@@ -5,4 +5,5 @@ export interface ContentItem {
   description?: string;
   tags?: string[];
   route?: string;
+  callback?: () => void;
 }

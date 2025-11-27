@@ -11,6 +11,7 @@
 	import type { Project } from '$lib/types/project';
 	import type { ContentItem } from '$lib/types/content';
 	import {
+		navigateTo,
 		addStringToSet,
 		removeStringFromSet,
 		getLastUpdatedTimesForProjects,
@@ -63,7 +64,8 @@
 		title: proj.title,
 		description: proj.description ?? '',
 		tags: proj.tags ?? [],
-		route: `/projects/${proj.slug}`
+		route: `/projects/${proj.slug}`,
+		callback: () => navigateTo(`/projects/${proj.slug}`)
 	}));
 
 	$: if (mounted) {
@@ -100,7 +102,6 @@
 </script>
 
 <svelte:head>
-	<!-- <title>Farhan Zia - projects</title> -->
 </svelte:head>
 
 <section

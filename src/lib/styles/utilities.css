@@ -106,7 +106,7 @@
 }
 
 .subtitle-sizing-0, h3 {
-    @apply text-[clamp(1rem,4vw,10rem)] md:text-[clamp(1rem,2vw,10rem)] lg:text-[clamp(1rem,1.6vw,10rem)];
+    @apply text-[clamp(1rem,5vw,10rem)] md:text-[clamp(1rem,2vw,10rem)] lg:text-[clamp(1rem,1.6vw,10rem)];
 }
 
 .subtitle-sizing-1, h2 {
@@ -134,7 +134,7 @@
 }
 
 .icon-sizing-2 {
-    @apply w-[1.7rem] sm:w-[2vw] md:w-[3vw] lg:w-[2vw] h-auto;
+    @apply w-[1.7rem] sm:w-[2rem] md:w-[3vw] lg:w-[2vw] h-auto;
 }
 
 .main {
@@ -167,6 +167,10 @@
 
 .nav-link.active {
     @apply text-light-accent dark:text-dark-accent text-shadow-[0_0_5px_var(--light-glow-accent),0_0_5px_var(--light-glow-accent)] dark:text-shadow-[0_0_5px_var(--dark-glow-accent),0_0_5px_var(--dark-glow-accent)];
+}
+
+.block {
+    @apply w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[30vw] portrait-lg:w-[45vw] h-[30vh] sm:h-[25vh] md:h-[35vh] lg:h-[50vh] portrait-lg:h-[30vh];
 }
 
 .toggle-group-item {

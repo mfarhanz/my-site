@@ -3,7 +3,6 @@
 </script>
 
 <svelte:head>
-	<!-- <title>Farhan Zia</title> -->
 </svelte:head>
 
 <section class="section grid-responsive smooth-trans-8 pb-[10vh] pt-[9vh]">
@@ -18,7 +17,7 @@
 			Developer based in Toronto, spending my days building practical tools and webapps in <span
 				class="text-light-primary dark:text-dark-primary">Python</span
 			>
-			and <span class="text-light-primary dark:text-dark-primary">Typescript</span>, with the hope
+			and <span class="text-light-primary dark:text-dark-primary">TypeScript</span>, with the hope
 			of making people's lives a bit easier.
 		</p>
 

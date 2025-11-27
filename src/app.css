@@ -181,7 +181,8 @@ html.dark .code-dark {
 	animation-timing-function: ease-in-out;
 }
 
-/* ::view-transition-old(main) {  // much better performance wise without these
+/* much better performance wise without these */
+/* ::view-transition-old(main) {
 	animation-name: plane-out;
 }
 
