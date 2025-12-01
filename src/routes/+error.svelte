@@ -1,6 +1,7 @@
 <script lang="ts">
 	import ContentCard from '$lib/components/ContentCard.svelte';
-	import { delay, debounce, getRandomItem, createShufflePicker, navigateBack, isTouchDevice } from '$lib/utils/helpers';
+	import { toast } from 'svelte-sonner';
+	import { debounce, getRandomItem, createShufflePicker, navigateBack, isTouchDevice } from '$lib/utils/helpers';
 	
 	let showMessage = true;
 	let startTransition = false;
@@ -17,8 +18,7 @@
 		{src: '20671-defender-ii-usa.html', title: 'Defender II'},
 		{src: '25238-flintstones-the-usa-europe.html', title: 'The Flintstones'},
 		{src: '18138-mr-nutz-europe.html', title: 'Mr Nutz'},
-		{src: '31284-poker-faced-paul-s-blackjack-usa-europe.html', title: 'Poker Faced Paul\'s Blackjack'},
-
+		{src: '31284-poker-faced-paul-s-blackjack-usa-europe.html', title: 'Poker Faced Paul\'s Blackjack'}
 	];
 
 	// Tracks sourced from https://soundcloud.com/  
@@ -119,6 +119,7 @@
 		// show back link 3s after ContentCard appears
 		setTimeout(() => {
 			showBackLink = true;
+			if (mode === "roms") toast('Any ads come from RetroGames.cc and fortunately only appear at the start. Click Play Now and please wait 10-20 seconds for them to disappear', { duration: 8000 });
 		}, 3000);
 	}, 4000);
 </script>
